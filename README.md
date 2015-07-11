@@ -5,6 +5,7 @@ Plugins are extracted to a subdirectory under `~/.vim/bundle`, and [Pathogen](ht
 ```Shell
 git clone git@github.com:robert-claypool/.vim.git ~/.vim
 ln -s /path/to/the/repo/.vim/.vimrc ~/.vimrc
+ln -s /path/to/the/repo/.gvimrc ~/.gvimrc
 ln -s /path/to/the/repo/.vim ~/.vim
 cd .vim
 git submodule init
@@ -20,7 +21,8 @@ The commands below account for these Windows specific issues:
 
 ```Shell
 git clone git@github.com:robert-claypool/.vim.git ~/.vim
-mklink %HOMEPATH%\.vimrc c:\path\to\the\repo\.vim\.vimrc
+mklink %HOMEPATH%\_vimrc c:\path\to\the\repo\.vim\.vimrc
+mklink %HOMEPATH%\_gvimrc c:\path\to\the\repo\.vim\.gvimrc
 mklink /D %HOMEPATH%\vimfiles c:\path\to\the\repo\.vim
 cd .vim
 git submodule init
