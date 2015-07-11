@@ -11,6 +11,7 @@ set wildmenu               " autocomplete for commands, try it with :color <Tab>
 set showmatch              " briefly jump to the matching brace when you insert one
 set incsearch              " search as characters are typed
 set hlsearch               " highlight matches
+set paste                  " prevent Vim from re-tabbing pasted code
 " <esc> is too far away, use this home row sequence instead...
 " note that comments cannot go after the inoremap sequence else they become part of it, thus these comments are above
 inoremap jkl <esc>
