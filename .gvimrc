@@ -1,4 +1,4 @@
-" font selection based on the OS, from http://stackoverflow.com/a/3316521/23566 
+" Font selection based on the OS, from http://stackoverflow.com/a/3316521/23566
 if has("gui_running")
     if has("gui_gtk2")
         set guifont=Inconsolata\ 12
@@ -8,3 +8,6 @@ if has("gui_running")
         set guifont=Consolas:h11:cANSI
     endif
 endif
+
+" Make the window larger than gVim's default
+:set lines=40 columns=160
