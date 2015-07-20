@@ -11,6 +11,8 @@ set wildmenu               " autocomplete for commands, try it with :color <Tab>
 set showmatch              " briefly jump to the matching brace when you insert one
 set incsearch              " search as characters are typed
 set hlsearch               " highlight matches
+set nowrap                " Wrapping is ugly, off by default
+set ruler                 " Show line number, row/column, or whatever is defined by rulerformat
 
 " <esc> is too far away, use this home row sequence instead...
 " note that comments cannot go after the inoremap (insert no recursion map) sequence
@@ -19,4 +21,3 @@ inoremap jj <esc>
 " nopaste is the default but we set it here explicitly as a reminder that
 " setting the 'paste' option will disable other options like inoremap, see :help 'paste'
 set nopaste
-
