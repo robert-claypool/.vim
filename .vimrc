@@ -13,6 +13,7 @@ set incsearch              " search as characters are typed
 set hlsearch               " highlight matches
 set nowrap                 " wrapping is ugly, off by default
 set ruler                  " show line number, row/column, or whatever is defined by rulerformat
+set backspace=indent,eol,start  " allow the backspace key to erase previously entered text, autoindent, and newlines
 
 " disable arrow keys for navigation, use `hjkl` and love it!
 inoremap  <Up>     <NOP>
