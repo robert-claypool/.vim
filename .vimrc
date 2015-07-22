@@ -6,7 +6,6 @@ set background=dark             " this only tells Vim what the terminal's backgo
 set number                      " yay! line numbers
 colorscheme desert256
 set cursorline                  " highlight current line
-filetype plugin indent on       " turn on filetype detection and allow loading of language specific indentation files
 set wildmenu                    " autocomplete for commands, try it with :color <Tab>
 set showmatch                   " briefly jump to the matching brace when you insert one
 set incsearch                   " search as characters are typed
@@ -14,6 +13,25 @@ set hlsearch                    " highlight matches
 set nowrap                      " wrapping is ugly, off by default
 set ruler                       " show line number, row/column, or whatever is defined by rulerformat
 set backspace=indent,eol,start  " allow the backspace key to erase previously entered text, autoindent, and newlines
+set autoindent                  " autocopy the indentation from the previous line 
+set wildmenu                    " command line completion, try it with ':color <Tab>'
+set wildmode=longest:full,full  " complete till the longest common string and start wildmenu, subsequent tabs cycle the menu options
+
+" A file type plugin (ftplugin) is a script that is run automatically when
+" Vim detects the type of file when as file is created or opened.
+" The type can be detected from the file name extension or from the file contents.
+if has('autocmd')
+    filetype plugin indent on     " turn on filetype detection and allow loading of language specific indentation files
+endif
+" expand tabs to spaces by default
+" two is the Node.js standard, tabs are the jQuery standrd, flame-wars abound, and 4 looks nice to me
+set expandtab 
+set shiftwidth=4
+set softtabstop=4
+if has('autocmd')
+    " now override with filetype based indentions
+    autocmd FileType ruby set softtabstop=2|set shiftwidth=2|set expandtab
+endif
 
 " disable arrow keys for navigation, use `hjkl` and love it!
 inoremap  <Up>     <NOP>
