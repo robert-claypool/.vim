@@ -13,9 +13,16 @@ set hlsearch                    " highlight matches
 set nowrap                      " wrapping is ugly, off by default
 set ruler                       " show line number, row/column, or whatever is defined by rulerformat
 set backspace=indent,eol,start  " allow the backspace key to erase previously entered text, autoindent, and newlines
-set autoindent                  " autocopy the indentation from the previous line 
+set autoindent                  " autocopy the indentation from the previous line
 set wildmenu                    " command line completion, try it with ':color <Tab>'
 set wildmode=longest:full,full  " complete till the longest common string and start wildmenu, subsequent tabs cycle the menu options
+
+if exists('+colorcolumn')       " short lines are more readable, so ...
+    set colorcolumn=80          " add a vertical line past 80 characters
+endif
+
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/   " credit to http://stackoverflow.com/a/4617156/23566
 
 " A file type plugin (ftplugin) is a script that is run automatically when
 " Vim detects the type of file when as file is created or opened.
@@ -25,7 +32,7 @@ if has('autocmd')
 endif
 " expand tabs to spaces by default
 " two is the Node.js standard, tabs are the jQuery standrd, flame-wars abound, and 4 looks nice to me
-set expandtab 
+set expandtab
 set shiftwidth=4
 set softtabstop=4
 if has('autocmd')
