@@ -2,7 +2,7 @@ call pathogen#infect()          " Now any plugins can be extracted to a subdirec
 
 set vb                          " visual beep, make co-workers happier
 syntax on
-set t_Co=256                    " enable 256 colors
+set t_Co=256                    " tell Vim that the terminal supports 265 colors
 set background=dark             " this only tells Vim what the terminal's backgound color looks like
 set number                      " yay! line numbers
 colorscheme desert256
@@ -11,18 +11,40 @@ set showmatch                   " briefly jump to the matching brace when you in
 set incsearch                   " search as characters are typed
 set hlsearch                    " highlight matches
 set nowrap                      " wrapping is ugly, off by default
+set linebreak                   " but if you switch to wrapping, try not to wrap in the middle of words
 set ruler                       " show line number, row/column, or whatever is defined by rulerformat
+set laststatus=2                " always show the status line
 set backspace=indent,eol,start  " allow the backspace key to erase previously entered text, autoindent, and newlines
 set autoindent                  " autocopy the indentation from the previous line
-set wildmenu                    " command line completion, try it with ':color <Tab>'
-set wildmode=longest:full,full  " complete till the longest common string and start wildmenu, subsequent tabs cycle the menu options
+set nrformats=hex               " because I literally never deal with octal, incrementing 06 (CTRL-A) should result in 07
+set splitbelow                  " horizontal windows to appear below the old window
+set foldcolumn=1                " add some left margin
+set encoding=utf8               " the Vim default is Latin-1, yikes! see http://unix.stackexchange.com/a/23414
 
-if exists('+colorcolumn')       " short lines are more readable, so ...
-    set colorcolumn=80          " add a vertical line past 80 characters
+if exists('+colorcolumn')       " short lines are more readable, so...
+    set colorcolumn=80          " add a vertical line-length column at 80 characters
 endif
 
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/   " credit to http://stackoverflow.com/a/4617156/23566
+
+set wildmenu                    " command line completion, try it with ':color <Tab>'
+set wildmode=longest:full,full  " complete till the longest common string and start wildmenu, subsequent tabs cycle the menu options
+
+" Ignore compiled files
+set wildignore=*.o,*~,*.pyc
+if has("win16") || has("win32")
+    set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
+else
+    set wildignore+=.git\*,.hg\*,.svn\*
+endif
+
+" Extra options when running in GUI mode
+if has("gui_running")
+    set guioptions-=T            " no toolbar
+    set guioptions-=r            " no right-side scrollbar
+    set guioptions-=e            " no fancy tabs, make them like look like console tabs
+endif
 
 " A file type plugin (ftplugin) is a script that is run automatically when
 " Vim detects the type of file when as file is created or opened.
