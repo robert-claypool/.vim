@@ -41,9 +41,9 @@ endif
 
 " extra options when running in GUI mode
 if has("gui_running")
-    set guioptions-=T            " no toolbar
-    set guioptions-=r            " no right-side scrollbar
-    set guioptions-=e            " no fancy tabs, make them like look like console tabs
+    set guioptions-=T           " no toolbar
+    set guioptions-=r           " no right-side scrollbar
+    set guioptions-=e           " no fancy tabs, make them like look like console tabs
 endif
 
 " A file type plugin (ftplugin) is a script that is run automatically
