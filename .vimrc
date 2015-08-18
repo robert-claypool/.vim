@@ -1,4 +1,4 @@
-call pathogen#infect()          " Now any plugins can be extracted to a subdirectory under ~/.vim/bundle, and they will be added to the 'runtimepath'
+call pathogen#infect()          " now any plugins can be extracted to a subdirectory under ~/.vim/bundle, and they will be added to the 'runtimepath'
 
 set vb                          " visual beep, make co-workers happier
 syntax on
@@ -31,7 +31,7 @@ match ExtraWhitespace /\s\+$/   " credit to http://stackoverflow.com/a/4617156/2
 set wildmenu                    " command line completion, try it with ':color <Tab>'
 set wildmode=longest:full,full  " complete till the longest common string and start wildmenu, subsequent tabs cycle the menu options
 
-" Ignore compiled files
+" ignore compiled files
 set wildignore=*.o,*~,*.pyc
 if has("win16") || has("win32")
     set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
@@ -39,15 +39,15 @@ else
     set wildignore+=.git\*,.hg\*,.svn\*
 endif
 
-" Extra options when running in GUI mode
+" extra options when running in GUI mode
 if has("gui_running")
     set guioptions-=T            " no toolbar
     set guioptions-=r            " no right-side scrollbar
     set guioptions-=e            " no fancy tabs, make them like look like console tabs
 endif
 
-" A file type plugin (ftplugin) is a script that is run automatically when
-" Vim detects the type of file when as file is created or opened.
+" A file type plugin (ftplugin) is a script that is run automatically
+" when Vim detects the type of file when as file is created or opened.
 " The type can be detected from the file name extension or from the file contents.
 if has('autocmd')
     filetype plugin indent on     " turn on filetype detection and allow loading of language specific indentation files
