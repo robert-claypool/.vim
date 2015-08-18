@@ -50,7 +50,7 @@ endif
 " when Vim detects the type of file when as file is created or opened.
 " The type can be detected from the file name extension or from the file contents.
 if has('autocmd')
-    filetype plugin indent on     " turn on filetype detection and allow loading of language specific indentation files
+    filetype plugin indent on   " turn on filetype detection and allow loading of language specific indentation files
 endif
 " expand tabs to spaces by default
 " two is the Node.js standard, tabs are the jQuery standrd, flame-wars abound, and 4 looks nice to me
