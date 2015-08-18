@@ -7,7 +7,6 @@ set background=dark             " this only tells Vim what the terminal's backgo
 set number                      " yay! line numbers
 colorscheme desert256
 set cursorline                  " highlight current line
-set wildmenu                    " autocomplete for commands, try it with :color <Tab>
 set showmatch                   " briefly jump to the matching brace when you insert one
 set incsearch                   " search as characters are typed
 set hlsearch                    " highlight matches
