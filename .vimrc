@@ -46,6 +46,30 @@ if has("gui_running")
     set guioptions-=e           " no fancy tabs, make them like look like console tabs
 endif
 
+" automatically save and load views/folds
+if has('autocmd')
+    " using a group keeps our autocommands from being defined twice (which can happen when .vimrc is sourced)
+    augroup manage_views
+        " allow :mkview to save folds, cursor position, etc., but no 'options'
+        " because remembering options tends to cause problems.
+        set viewoptions-=options
+        autocmd BufWritePost *
+        \   if expand('%') != '' && &buftype !~ 'nofile'
+        \|      mkview
+        \|  endif
+        autocmd BufRead *
+        \   if expand('%') != '' && &buftype !~ 'nofile'
+        \|      silent loadview
+        \|  endif
+    augroup END
+endif
+
+" the default viewdir, used by :mkview, is a poor choice on Windows
+" change it to a path that won't need Administrator rights to create
+if has("win16") || has("win32")
+    set viewdir=~/vimfiles/view
+endif
+
 " A file type plugin (ftplugin) is a script that is run automatically
 " when Vim detects the type of file when as file is created or opened.
 " The type can be detected from the file name extension or from the file contents.
@@ -59,7 +83,9 @@ set shiftwidth=4
 set softtabstop=4
 if has('autocmd')
     " now override with filetype based indentions
-    autocmd FileType ruby set softtabstop=2|set shiftwidth=2|set expandtab
+    augroup filetype_overrides
+        autocmd FileType ruby set softtabstop=2|set shiftwidth=2|set expandtab
+    augroup END
 endif
 
 " disable arrow keys for navigation, use `hjkl` and love it!
