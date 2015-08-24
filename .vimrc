@@ -21,6 +21,16 @@ set splitbelow                  " horizontal windows to appear below the old win
 set foldcolumn=1                " add some left margin
 set encoding=utf8               " the Vim default is Latin-1, yikes! see http://unix.stackexchange.com/a/23414
 
+set showcmd                     " shows the current command hence the leader key for as long as it is active
+set timeoutlen=2000             " keep the <leader> active for 2 seconds (default is 1)
+let mapleader=","               " backslash is the default, comma is easier
+let g:mapleader=","
+
+if has("spell")                 " spell checking was added in Vim 7
+    set spelllang=en_us
+    nnoremap <leader>ss :setlocal spell!<cr>
+endif
+
 if exists('+colorcolumn')       " short lines are more readable, so...
     set colorcolumn=80          " add a vertical line-length column at 80 characters
 endif
