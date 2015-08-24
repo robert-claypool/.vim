@@ -25,10 +25,13 @@ set showcmd                     " shows the current command hence the leader key
 set timeoutlen=2000             " keep the <leader> active for 2 seconds (default is 1)
 let mapleader=","               " backslash is the default, comma is easier
 let g:mapleader=","
+" Keep <Leader> and <LocalLeader> different to reduce chance of mappings from
+" global plugins to clash with mappings for filetype plugins.
+let maplocalleader="\\"         " \\ because we must escape the backslash!
 
 if has("spell")                 " spell checking was added in Vim 7
     set spelllang=en_us
-    nnoremap <leader>ss :setlocal spell!<cr>
+    nnoremap <Leader>ss :setlocal spell!<cr>
 endif
 
 if exists('+colorcolumn')       " short lines are more readable, so...
