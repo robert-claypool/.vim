@@ -108,6 +108,10 @@ noremap   <Down>   <NOP>
 noremap   <Left>   <NOP>
 noremap   <Right>  <NOP>
 
+" never engage Ex mode (make Q harmless)
+" http://www.bestofvim.com/tip/leave-ex-mode-good/
+nnoremap Q <nop>
+
 " <esc> is too far away, use this home row sequence instead...
 " note that comments cannot go after the inoremap (insert no recursion map) sequence
 " else they become part of it, thus these comments are above the command itself
