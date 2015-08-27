@@ -38,6 +38,21 @@ if exists('+colorcolumn')       " short lines are more readable, so...
     set colorcolumn=80          " add a vertical line-length column at 80 characters
 endif
 
+if exists('g:loaded_sqlutilities')
+    " add mappings for SQLUtilities.vim, mnemonic explanation:
+    " s   - sql
+    " f   - format
+    " cl  - column list
+    " cd  - column definition
+    " cdt - column datatype
+    " cp  - create procedure
+    vmap <leader>sf        <Plug>SQLU_Formatter<CR>
+    nmap <leader>scl       <Plug>SQLU_CreateColumnList<CR>
+    nmap <leader>scd       <Plug>SQLU_GetColumnDef<CR>
+    nmap <leader>scdt      <Plug>SQLU_GetColumnDataType<CR>
+    nmap <leader>scp       <Plug>SQLU_CreateProcedure<CR>
+endif
+
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/   " credit to http://stackoverflow.com/a/4617156/23566
 
