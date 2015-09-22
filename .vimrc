@@ -1,5 +1,9 @@
 call pathogen#infect()          " now any plugins can be extracted to a subdirectory under ~/.vim/bundle, and they will be added to the 'runtimepath'
 
+if &compatible                  " if not already set
+    set nocompatible            " use vim defaults (easier, more user friendly than vi defaults)
+endif
+
 set vb                          " visual beep, make co-workers happier
 syntax on
 set t_Co=256                    " tell Vim that the terminal supports 265 colors
@@ -44,8 +48,11 @@ match ExtraWhitespace /\s\+$/   " credit to http://stackoverflow.com/a/4617156/2
 set wildmenu                    " command line completion, try it with ':color <Tab>'
 set wildmode=longest:full,full  " complete till the longest common string and start wildmenu, subsequent tabs cycle the menu options
 
-" ignore compiled files
-set wildignore=*.o,*~,*.pyc
+" ignore various binary/compiled/transient files
+set wildignore=*.o,*.obj,*~,*.py[cod],*.swp
+set wildignore+=*.exe,*.msi,*.dll,*.pdb
+set wildignore+=*.png,*.jpg,*.jpeg,*.gif,*.pdf,*.zip,*.7z
+set wildignore+=*.mxd,*.msd     " Esri ArcGIS stuff
 if has("win16") || has("win32")
     set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
 else
@@ -101,7 +108,7 @@ if has('autocmd')
     augroup END
 endif
 
-" disable arrow keys for navigation, use `hjkl` and love it!
+" disable arrow keys for navigation, use `hjkl` and love it
 inoremap  <Up>     <NOP>
 inoremap  <Down>   <NOP>
 inoremap  <Left>   <NOP>
