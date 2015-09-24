@@ -42,6 +42,11 @@ if exists('+colorcolumn')       " short lines are more readable, so...
     set colorcolumn=80          " add a vertical line-length column at 80 characters
 endif
 
+" Show special characters
+if v:version >= 700
+    set list listchars=tab:»-,trail:·,extends:→
+endif
+
 if exists('g:loaded_sqlutilities')
     " add mappings for SQLUtilities.vim, mnemonic explanation:
     " s   - sql
@@ -116,6 +121,7 @@ endif
 set expandtab
 set shiftwidth=4
 set softtabstop=4
+set tabstop=4
 if has('autocmd')
     " now override with filetype based indentions
     augroup filetype_overrides
