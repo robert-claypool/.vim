@@ -7,7 +7,11 @@ if has("gui_running")
     elseif has("gui_win32")
         set guifont=Consolas:h11:cANSI
     endif
-endif
 
-" Make the window larger than gVim's default
-:set lines=40 columns=160
+    " Make the window larger than gVim's default
+    set lines=45 columns=130
+
+    set guioptions-=T   " no toolbar
+    set guioptions-=r   " no right-side scrollbar
+    set guioptions-=e   " no fancy tabs, make them like look like console tabs
+endif

@@ -17,6 +17,7 @@ set hlsearch                    " highlight matches
 set nowrap                      " wrapping is ugly, off by default
 set linebreak                   " but if you switch to wrapping, try not to wrap in the middle of words
 set ruler                       " show line number, row/column, or whatever is defined by rulerformat
+set title                       " show xterm title, does nothing in GVim
 set laststatus=2                " always show the status line
 set backspace=indent,eol,start  " allow the backspace key to erase previously entered text, autoindent, and newlines
 set autoindent                  " autocopy the indentation from the previous line
@@ -24,6 +25,8 @@ set nrformats=hex               " because I literally never deal with octal, inc
 set splitbelow                  " horizontal windows to appear below the old window
 set foldcolumn=1                " add some left margin
 set encoding=utf8               " the Vim default is Latin-1, yikes! see http://unix.stackexchange.com/a/23414
+set history=200                 " keep a longer history, 20 is the default
+set scrolloff=3                 " start scrolling a few lines before the border (more context around the cursor)
 
 set showcmd                     " shows the current command hence the leader key for as long as it is active
 set timeoutlen=2000             " keep the <leader> active for 2 seconds (default is 1)
@@ -77,13 +80,6 @@ if has("win16") || has("win32")
     set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
 else
     set wildignore+=.git\*,.hg\*,.svn\*
-endif
-
-" extra options when running in GUI mode
-if has("gui_running")
-    set guioptions-=T           " no toolbar
-    set guioptions-=r           " no right-side scrollbar
-    set guioptions-=e           " no fancy tabs, make them like look like console tabs
 endif
 
 " automatically save and load views/folds
