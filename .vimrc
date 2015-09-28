@@ -7,9 +7,7 @@ endif
 set vb                          " visual beep, make co-workers happier
 syntax on
 set t_Co=256                    " tell Vim that the terminal supports 265 colors
-set background=dark             " this only tells Vim what the terminal's backgound color looks like
 set number                      " yay! line numbers
-colorscheme desert256
 set cursorline                  " highlight current line
 set showmatch                   " briefly jump to the matching brace when you insert one
 set incsearch                   " search as characters are typed
@@ -27,6 +25,13 @@ set foldcolumn=1                " add some left margin
 set encoding=utf8               " the Vim default is Latin-1, yikes! see http://unix.stackexchange.com/a/23414
 set history=200                 " keep a longer history, 20 is the default
 set scrolloff=3                 " start scrolling a few lines before the border (more context around the cursor)
+
+set background=dark             " this only tells Vim what the terminal's backgound color looks like
+if has("gui_running")
+  colorscheme base16-pop        " http://chriskempson.github.io/base16
+else
+  colorscheme desert256
+endif
 
 set showcmd                     " shows the current command hence the leader key for as long as it is active
 set timeoutlen=2000             " keep the <leader> active for 2 seconds (default is 1)
