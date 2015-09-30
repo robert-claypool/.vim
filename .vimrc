@@ -9,7 +9,7 @@ endif
 syntax on
 set hidden                     " hide buffers instead of closing them, http://usevim.com/2012/10/19/vim101-set-hidden/
 set vb                         " visual beep, make co-workers happier
-set t_Co=256                   " tell Vim that the terminal supports 265 colors
+set t_Co=256                   " tell Vim that the terminal supports 256 colors
 set number                     " yay! line numbers
 set cursorline                 " highlight current line
 set showmatch                  " briefly jump to the matching brace when you insert one
