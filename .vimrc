@@ -1,12 +1,13 @@
-call pathogen#infect() " now any plugins can be extracted to a subdirectory under ~/.vim/bundle, and they will be added to the 'runtimepath'
+" Extract plugins to a subdirectory under ~/.vim/bundle, pathogen will add them to the 'runtimepath'
+call pathogen#infect()
 
 if &compatible " if not already set
-    " Use vim defaults (easier, more user friendly than vi defaults).
+    " Use Vim defaults (easier, more user friendly than vi defaults).
     " This must be first because it changes other options as a side effect.
     set nocompatible
 endif
 
-syntax on
+syntax on                      " of course
 set hidden                     " hide buffers instead of closing them, http://usevim.com/2012/10/19/vim101-set-hidden/
 set vb                         " visual beep, make co-workers happier
 set t_Co=256                   " tell Vim that the terminal supports 256 colors
@@ -69,6 +70,7 @@ let maplocalleader="\\"
 if has("spell") " spell checking was added in Vim 7
     set spelllang=en_us
     nnoremap <Leader>ss :setlocal spell!<cr>
+    set spell " on by default
 endif
 
 if exists('+colorcolumn') " short lines are more readable, so...
@@ -145,7 +147,7 @@ if has('autocmd')
 endif
 
 " expand tabs to spaces by default
-" two is the Node.js standard, tabs are the jQuery standrd, flame-wars abound, and 4 looks nice to me
+" two is the Node.js standard, tabs are the jQuery standard, flame-wars abound, and 4 looks nice to me
 set expandtab
 set shiftwidth=4
 set softtabstop=4
