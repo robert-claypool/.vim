@@ -70,7 +70,10 @@ let maplocalleader="\\"
 if has("spell") " spell checking was added in Vim 7
     set spelllang=en_us
     nnoremap <Leader>ss :setlocal spell!<cr>
-    set spell " on by default
+    if has('autocmd')
+        " turn on by default for files < 10K
+        autocmd Filetype * if getfsize(@%) < 10240 | set spell | endif
+    endif
 endif
 
 if exists('+colorcolumn') " short lines are more readable, so...
@@ -143,7 +146,7 @@ endif
 " when Vim detects the type of file when as file is created or opened.
 " The type can be detected from the file name extension or from the file contents.
 if has('autocmd')
-    filetype plugin indent on   " turn on filetype detection and allow loading of language specific indentation files
+    filetype plugin indent on " turn on filetype detection and allow loading of language specific indentation files
 endif
 
 " expand tabs to spaces by default
@@ -173,7 +176,7 @@ noremap   <Right>  <NOP>
 " http://www.bestofvim.com/tip/leave-ex-mode-good/
 nnoremap Q <nop>
 
-" <esc> is too far away, use this home row sequence instead...
+" <esc> is so so far away, use this `jj` home row sequence instead
 " note that comments cannot go after the inoremap (insert no recursion map) sequence
 " else they become part of it, thus these comments are above the command itself
 inoremap jj <esc>
