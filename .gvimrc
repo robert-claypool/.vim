@@ -1,5 +1,5 @@
-" Font selection based on the OS, from http://stackoverflow.com/a/3316521/23566
 if has("gui_running")
+    " Font selection is based on the OS, from http://stackoverflow.com/a/3316521/23566
     if has("gui_gtk2")
         set guifont=Inconsolata\ 12
     elseif has("gui_macvim")
