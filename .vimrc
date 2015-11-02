@@ -159,6 +159,8 @@ if has('autocmd')
     " now override with filetype based indentions
     augroup filetype_overrides
         autocmd FileType ruby set softtabstop=2|set shiftwidth=2|set expandtab
+        " PEP-8 tells us to use spaces, https://python.org/dev/peps/pep-0008/
+        autocmd FileType python set softtabstop=4|set shiftwidth=4|set expandtab|set tabstop=4
     augroup END
 endif
 
