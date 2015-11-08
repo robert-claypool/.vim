@@ -1,4 +1,4 @@
-" Extract plugins to a subdirectory under ~/.vim/bundle, pathogen will add them to the 'runtimepath'
+" Extract plugins to a subdirectory under ~/.vim/bundle, pathogen will add them to the 'runtimepath'.
 call pathogen#infect()
 
 if &compatible " if not already set
@@ -30,7 +30,7 @@ set history=200                " keep a longer history, 20 is the default
 set scrolloff=3                " start scrolling a few lines before the border (more context around the cursor)
 set laststatus=2               " always show the status line
 
-" Build our custom statusline
+" Build our custom status line.
 set statusline=
 set statusline+=%-3.3n\        " buffer number
 set statusline+=%f\            " filename
@@ -64,7 +64,7 @@ let g:mapleader=","
 
 " Keep <Leader> and <LocalLeader> different to reduce chance of mappings from
 " global plugins to clash with mappings for filetype plugins.
-" use \\ because we must escape the backslash
+" Use \\ because we must escape the backslash.
 let maplocalleader="\\"
 
 if has("spell") " spell checking was added in Vim 7
@@ -81,7 +81,7 @@ if exists('+colorcolumn') " short lines are more readable, so...
     highlight ColorColumn guibg=coral4 " bold, eh?
 endif
 
-" Show special characters
+" Show special characters.
 if v:version >= 700
     set list listchars=tab:»-,trail:·,extends:→
 endif
@@ -107,7 +107,7 @@ match ExtraWhitespace /\s\+$/  " credit to http://stackoverflow.com/a/4617156/23
 set wildmenu                   " command line completion, try it with ':color <Tab>'
 set wildmode=longest:full,full " complete till the longest common string and start wildmenu, subsequent tabs cycle the menu options
 
-" ignore various binary/compiled/transient files
+" Ignore various binary/compiled/transient files.
 set wildignore=*.o,*.obj,*~,*.py[cod],*.swp
 set wildignore+=*.exe,*.msi,*.dll,*.pdb
 set wildignore+=*.png,*.jpg,*.jpeg,*.gif,*.pdf,*.zip,*.7z
@@ -118,7 +118,7 @@ else
     set wildignore+=.git\*,.hg\*,.svn\*
 endif
 
-" automatically save and load views/folds
+" Automatically save and load views/folds.
 if has('autocmd')
     " using a group keeps our autocommands from being defined twice (which can happen when .vimrc is sourced)
     augroup manage_views
@@ -136,8 +136,8 @@ if has('autocmd')
     augroup END
 endif
 
-" the default viewdir, used by :mkview, is a poor choice on Windows
-" change it to a path that won't need Administrator rights to create
+" The default viewdir, used by :mkview, is a poor choice on Windows,
+" change it to a path that won't need Administrator rights to create.
 if has("win16") || has("win32")
     set viewdir=~/vimfiles/view
 endif
@@ -149,8 +149,8 @@ if has('autocmd')
     filetype plugin indent on " turn on filetype detection and allow loading of language specific indentation files
 endif
 
-" expand tabs to spaces by default
-" two is the Node.js standard, tabs are the jQuery standard, flame-wars abound, and 4 looks nice to me
+" Expand tabs to spaces by default.
+" Two is the Node.js standard, tabs are the jQuery standard, 4 looks nice to me.
 set expandtab
 set shiftwidth=4
 set softtabstop=4
@@ -164,23 +164,32 @@ if has('autocmd')
     augroup END
 endif
 
-" disable arrow keys for navigation, use `hjkl` and love it
-inoremap  <Up>     <NOP>
-inoremap  <Down>   <NOP>
-inoremap  <Left>   <NOP>
-inoremap  <Right>  <NOP>
-noremap   <Up>     <NOP>
-noremap   <Down>   <NOP>
-noremap   <Left>   <NOP>
-noremap   <Right>  <NOP>
+" Disable arrow keys for navigation, use `hjkl` and love it.
+inoremap <Up>    <NOP>
+inoremap <Down>  <NOP>
+inoremap <Left>  <NOP>
+inoremap <Right> <NOP>
+noremap  <Up>    <NOP>
+noremap  <Down>  <NOP>
+noremap  <Left>  <NOP>
+noremap  <Right> <NOP>
 
-" never engage Ex mode (make Q harmless)
+" Typo hitting F1 will open "help" when you probably just wanted to get out of insert mode, fix that.
+inoremap <F1> <Esc>
+
+" Have dedicated tab switchers.
+inoremap <F7> gT
+inoremap <F8> gt
+noremap  <F7> gT
+noremap  <F8> gt
+
+" Never engage Ex mode (make Q harmless).
 " http://www.bestofvim.com/tip/leave-ex-mode-good/
 nnoremap Q <nop>
 
-" <esc> is so so far away, use this `jj` home row sequence instead
-" note that comments cannot go after the inoremap (insert no recursion map) sequence
-" else they become part of it, thus these comments are above the command itself
+" <Esc> is so so far away, use this `jj` home row sequence instead.
+" Note that comments cannot go after the inoremap (insert no recursion map) sequence
+" else they become part of it, thus these comments are above the command itself.
 inoremap jj <esc>
 
 " nopaste is the default but we set it here explicitly as a reminder that
