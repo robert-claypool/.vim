@@ -28,3 +28,8 @@ cd .vim
 git submodule init
 git submodule update
 ```
+
+### External Program Dependencies
+`vim-autoformat` calls external programs to achieve best results.
+Separately install [js-beautify](https://github.com/einars/js-beautify) and
+other formatters that you want to use.
