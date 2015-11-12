@@ -67,9 +67,14 @@ let g:mapleader=","
 " Use \\ because we must escape the backslash.
 let maplocalleader="\\"
 
+" Beautify JSON with Python.
+" https://docs.python.org/3/library/json.html#json-commandline
+" Since = is the Vim operator to format a selected text, I'm using it here.
+nnoremap <localleader>=j :%!python -m json.tool<cr>
+
 if has("spell") " spell checking was added in Vim 7
     set spelllang=en_us
-    nnoremap <Leader>ss :setlocal spell!<cr>
+    nnoremap <localleader>ss :setlocal spell!<cr>
     if has('autocmd')
         " turn on by default for files < 10K
         autocmd Filetype * if getfsize(@%) < 10240 | set spell | endif
@@ -94,11 +99,11 @@ if exists('g:loaded_sqlutilities')
     " cd  - column definition
     " cdt - column datatype
     " cp  - create procedure
-    vmap <leader>sf        <Plug>SQLU_Formatter<CR>
-    nmap <leader>scl       <Plug>SQLU_CreateColumnList<CR>
-    nmap <leader>scd       <Plug>SQLU_GetColumnDef<CR>
-    nmap <leader>scdt      <Plug>SQLU_GetColumnDataType<CR>
-    nmap <leader>scp       <Plug>SQLU_CreateProcedure<CR>
+    vmap <localleader>sf   <plug>SQLU_Formatter<cr>
+    nmap <localleader>scl  <plug>SQLU_CreateColumnList<cr>
+    nmap <localleader>scd  <plug>SQLU_GetColumnDef<cr>
+    nmap <localleader>scdt <plug>SQLU_GetColumnDataType<cr>
+    nmap <localleader>scp  <plug>SQLU_CreateProcedure<cr>
 endif
 
 highlight ExtraWhitespace ctermbg=red guibg=red
@@ -165,23 +170,23 @@ if has('autocmd')
 endif
 
 " Disable arrow keys for navigation, use `hjkl` and love it.
-inoremap <Up>    <NOP>
-inoremap <Down>  <NOP>
-inoremap <Left>  <NOP>
-inoremap <Right> <NOP>
-noremap  <Up>    <NOP>
-noremap  <Down>  <NOP>
-noremap  <Left>  <NOP>
-noremap  <Right> <NOP>
+inoremap <up>    <nop>
+inoremap <down>  <nop>
+inoremap <left>  <nop>
+inoremap <right> <nop>
+noremap  <up>    <nop>
+noremap  <down>  <nop>
+noremap  <left>  <nop>
+noremap  <right> <nop>
 
 " Typo hitting F1 will open "help" when you probably just wanted to get out of insert mode, fix that.
-inoremap <F1> <Esc>
+inoremap <f1> <esc>
 
 " Have dedicated tab switchers.
-inoremap <F7> gT
-inoremap <F8> gt
-noremap  <F7> gT
-noremap  <F8> gt
+inoremap <f7> gT
+inoremap <f8> gt
+noremap  <f7> gT
+noremap  <f8> gt
 
 " Never engage Ex mode (make Q harmless).
 " http://www.bestofvim.com/tip/leave-ex-mode-good/
