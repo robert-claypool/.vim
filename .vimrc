@@ -102,9 +102,6 @@ if exists('g:loaded_sqlutilities')
     nmap <localleader>scp  <plug>SQLU_CreateProcedure<cr>
 endif
 
-highlight ExtraWhitespace ctermbg=red guibg=red
-match ExtraWhitespace /\s\+$/  " credit to http://stackoverflow.com/a/4617156/23566
-
 set wildmenu                   " command line completion, try it with ':color <Tab>'
 set wildmode=longest:full,full " complete till the longest common string and start wildmenu, subsequent tabs cycle the menu options
 
@@ -119,10 +116,18 @@ else
     set wildignore+=.git\*,.hg\*,.svn\*
 endif
 
+" Whitespace highlighting is wrapped in a function because we need to call
+" it when the colorscheme is changed (which happens a lot, see mode_yo below).
+function! WhoaWhitespace(color)
+    exe 'highlight ExtraWhitespace ctermbg='.a:color.' guibg='.a:color
+    match ExtraWhitespace /\s\+$/ " credit to http://stackoverflow.com/a/4617156/23566
+endfunction
+
 set background=dark " this only tells Vim what the terminal's backgound color looks like
 if has("gui_running")
     colorscheme base16-pop         " http://chriskempson.github.io/base16
     highlight Comment guifg=gray42 " help my poor eyes
+    call WhoaWhitespace("red")
 else
     colorscheme desert256
 endif
@@ -150,7 +155,9 @@ if has('autocmd')
         if has("gui_running")
             augroup mode_yo
                 autocmd InsertEnter * colorscheme base16-eighties
+                autocmd InsertEnter * call WhoaWhitespace("red")
                 autocmd InsertLeave * colorscheme base16-pop
+                autocmd InsertLeave * call WhoaWhitespace("red")
             augroup END
         endif
     endif
