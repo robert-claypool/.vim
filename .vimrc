@@ -174,6 +174,14 @@ endif
 " The type can be detected from the file name extension or from the file contents.
 if has('autocmd')
     filetype plugin indent on " turn on filetype detection and allow loading of language specific indentation files
+    augroup my_filetypes
+        autocmd BufNewFile,BufRead *.server set filetype=javascript
+        autocmd BufNewFile,BufRead *.js.* set filetype=javascript
+        autocmd BufNewFile,BufRead *.json.* set filetype=javascript
+        autocmd BufNewFile,BufRead *.config set filetype=javascript
+        autocmd BufNewFile,BufRead db.config set filetype=xml
+        autocmd BufNewFile,BufRead Web.config set filetype=xml
+    augroup END
 endif
 
 " Expand tabs to spaces by default.
