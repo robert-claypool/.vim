@@ -72,6 +72,10 @@ let maplocalleader="\\"
 " Since = is the Vim operator to format a selected text, I'm using it here.
 nnoremap <localleader>=j :%!python -m json.tool<cr>
 
+" Remove all trailing whitespace.
+" http://vi.stackexchange.com/a/2285/4919
+nnoremap <localleader>dw :let _s=@/<bar>:%s/\s\+$//e<bar>:let @/=_s<bar><cr>
+
 if has("spell") " spell checking was added in Vim 7
     set spelllang=en_us
     nnoremap <localleader>ss :setlocal spell!<cr>
