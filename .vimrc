@@ -49,14 +49,6 @@ set statusline+=%#error#               " switch to error highlighting
 set statusline+=%{&paste?'[paste]':''} " warn if &paste is set
 set statusline+=%*                     " return to normal highlighting
 
-set background=dark " this only tells Vim what the terminal's backgound color looks like
-if has("gui_running")
-    colorscheme base16-pop         " http://chriskempson.github.io/base16
-    highlight Comment guifg=gray42 " help my poor eyes
-else
-    colorscheme desert256
-endif
-
 set showcmd         " shows the current command hence the leader key for as long as it is active
 set timeoutlen=2000 " keep the <leader> active for 2 seconds (default is 1)
 let mapleader=","   " backslash is the default, comma is easier
@@ -127,11 +119,20 @@ else
     set wildignore+=.git\*,.hg\*,.svn\*
 endif
 
-" Automatically save and load views/folds.
+set background=dark " this only tells Vim what the terminal's backgound color looks like
+if has("gui_running")
+    colorscheme base16-pop         " http://chriskempson.github.io/base16
+    highlight Comment guifg=gray42 " help my poor eyes
+else
+    colorscheme desert256
+endif
+
 if has('autocmd')
-    " using a group keeps our autocommands from being defined twice (which can happen when .vimrc is sourced)
+    " Automatically save and load views/folds...
+
+    " Using groups keeps our autocommands from being defined twice (which can happen when .vimrc is sourced)
     augroup manage_views
-        " allow :mkview to save folds, cursor position, etc., but no 'options'
+        " Allow :mkview to save folds, cursor position, etc., but no 'options'
         " because remembering options tends to cause problems.
         set viewoptions-=options
         autocmd BufWritePost *
@@ -143,6 +144,16 @@ if has('autocmd')
         \|      silent loadview
         \|  endif
     augroup END
+
+    " Let's make it obvious if I'm in insert mode.
+    if version >= 700
+        if has("gui_running")
+            augroup mode_yo
+                autocmd InsertEnter * colorscheme base16-eighties
+                autocmd InsertLeave * colorscheme base16-pop
+            augroup END
+        endif
+    endif
 endif
 
 " The default viewdir, used by :mkview, is a poor choice on Windows,
