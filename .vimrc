@@ -212,6 +212,17 @@ if has('autocmd')
     augroup END
 endif
 
+if has("win32")
+    " Vim uses an external EditorConfig Core library to parse .editorconfig
+    " files and pass back the properties that should be used.
+    let ecpath = expand("~")."\\vimfiles\\lib\\editorconfig-0.12.0-Windows-AMD64.exe"
+    if filereadable(ecpath)
+        let g:EditorConfig_exec_path = ecpath
+        " Ensure that this plugin works well with vim-fugitive.
+        let g:EditorConfig_exclude_patterns = ['fugitive://.*']
+    endif
+endif
+
 " Specify additional HTML tags to auto indent.
 let g:html_indent_inctags = "html,body,head,tbody"
 " Indent after <script> and <style> tags too.
