@@ -77,11 +77,6 @@ if has("spell") " spell checking was added in Vim 7
     endif
 endif
 
-if exists('+colorcolumn') " short lines are more readable, so...
-    set colorcolumn=80    " add a vertical line-length column at 80 characters
-    highlight ColorColumn guibg=coral4 " bold, eh?
-endif
-
 " Show special characters.
 if v:version >= 700
     set list listchars=tab:»-,trail:·,extends:→
@@ -116,11 +111,21 @@ else
     set wildignore+=.git\*,.hg\*,.svn\*
 endif
 
-" Whitespace highlighting is wrapped in a function because we need to call
-" it when the colorscheme is changed (which happens a lot, see mode_yo below).
+" Whitespace and color column highlighting are wrapped in a functions because
+" we need to call them when the colorscheme is changed
+" (which happens a lot, see mode_yo below).
 function! WhoaWhitespace(color)
     exe 'highlight ExtraWhitespace ctermbg='.a:color.' guibg='.a:color
     match ExtraWhitespace /\s\+$/ " credit to http://stackoverflow.com/a/4617156/23566
+endfunction
+
+function! WhoaColorColumn(color)
+    if exists('+colorcolumn') " short lines are more readable, so...
+        " add a vertical line-length column at 79 characters
+        " 79 is from https://www.python.org/dev/peps/pep-0008/#maximum-line-length
+        set colorcolumn=79
+        exe 'highlight ColorColumn guibg='.a:color
+    endif
 endfunction
 
 set background=dark " this only tells Vim what the terminal's backgound color looks like
@@ -128,6 +133,7 @@ if has("gui_running")
     colorscheme base16-pop         " http://chriskempson.github.io/base16
     highlight Comment guifg=gray42 " help my poor eyes
     call WhoaWhitespace("red")
+    call WhoaColorColumn("coral4") " bold, eh?
 else
     colorscheme desert256
 endif
@@ -156,8 +162,10 @@ if has('autocmd')
             augroup mode_yo
                 autocmd InsertEnter * colorscheme base16-eighties
                 autocmd InsertEnter * call WhoaWhitespace("red")
+                autocmd InsertEnter * call WhoaColorColumn("DarkOliveGreen3")
                 autocmd InsertLeave * colorscheme base16-pop
                 autocmd InsertLeave * call WhoaWhitespace("red")
+                autocmd InsertLeave * call WhoaColorColumn("coral4")
             augroup END
         endif
     endif
