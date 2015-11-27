@@ -185,17 +185,22 @@ if has('autocmd')
 endif
 
 " Expand tabs to spaces by default.
-" Two is the Node.js standard, tabs are the jQuery standard, 4 looks nice to me.
-set expandtab
-set shiftwidth=4
-set softtabstop=4
-set tabstop=4
+setlocal expandtab
+setlocal shiftwidth=4
+setlocal softtabstop=4
+setlocal tabstop=4
 if has('autocmd')
     " now override with filetype based indentions
     augroup filetype_overrides
-        autocmd FileType ruby set softtabstop=2|set shiftwidth=2|set expandtab
+        " Two is the Node.js standard, https://github.com/nodejs/node/blob/master/.eslintrc#L46
+        " Tabs are the jQuery standard, FYI. Node wins here.
+        autocmd FileType javascript setlocal softtabstop=2|setlocal shiftwidth=2|setlocal expandtab
+        autocmd FileType html       setlocal softtabstop=2|setlocal shiftwidth=2|setlocal expandtab
+        autocmd FileType css        setlocal softtabstop=2|setlocal shiftwidth=2|setlocal expandtab
+        " The unofficial Ruby style guide: http://www.caliban.org/ruby/rubyguide.shtml#indentation
+        autocmd FileType ruby       setlocal softtabstop=2|setlocal shiftwidth=2|setlocal expandtab
         " PEP-8 tells us to use spaces, https://python.org/dev/peps/pep-0008/
-        autocmd FileType python set softtabstop=4|set shiftwidth=4|set expandtab|set tabstop=4
+        autocmd FileType python     setlocal softtabstop=4|setlocal shiftwidth=4|setlocal expandtab|setlocal tabstop=4
     augroup END
 endif
 
