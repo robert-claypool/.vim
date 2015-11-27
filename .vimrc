@@ -212,6 +212,12 @@ if has('autocmd')
     augroup END
 endif
 
+" Specify additional HTML tags to auto indent.
+let g:html_indent_inctags = "html,body,head,tbody"
+" Indent after <script> and <style> tags too.
+let g:html_indent_script1 = "inc"
+let g:html_indent_style1 = "inc"
+
 " Disable arrow keys for navigation, use `hjkl` and love it.
 inoremap <up>    <nop>
 inoremap <down>  <nop>
