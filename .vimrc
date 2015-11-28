@@ -224,6 +224,7 @@ if has("win32")
 endif
 
 " We default to LF line endings for new files.
+" http://vim.wikia.com/wiki/Change_end-of-line_format_for_dos-mac-unix
 " 1. This will not change the format of existing files, use dos2unix for that.
 " 2. You can override line endings to be CR or CRLF on a per-project basis by
 " adding an EditorConfig with 'cr' or 'crlf' as the end_of_line.
