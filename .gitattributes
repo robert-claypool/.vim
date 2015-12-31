@@ -4,3 +4,6 @@
 * text=auto
 # Make the working directory consistent with the repo; use LF for both.
 * eol=lf
+
+# Tell Git which files are binary. They should not be normalized.
+*.exe -text
