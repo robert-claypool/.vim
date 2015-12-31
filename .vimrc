@@ -60,9 +60,10 @@ let g:mapleader=","
 " Use \\ because we must escape the backslash.
 let maplocalleader="\\"
 
-" Faster saving.
-" We use ww because Vim will wait timeoutlen if there is only one w.
-nnoremap <localleader>ww :w<cr>
+" We use ww and qq because Vim will wait timeoutlen if there is only one w or q.
+nnoremap <localleader>ww :w<cr>|  " faster save
+nnoremap <localleader>qq :q<cr>|  " faster quit
+nnoremap <localleader>wq :wq<cr>| " faster quit and save
 
 " Beautify JSON with Python.
 " https://docs.python.org/3/library/json.html#json-commandline
