@@ -15,6 +15,7 @@ set number                     " yay! line numbers
 set cursorline                 " highlight current line
 set showmatch                  " briefly jump to the matching brace when you insert one
 set incsearch                  " search as characters are typed
+set ignorecase                 " ignore case when searching
 set hlsearch                   " highlight matches
 set nowrap                     " wrapping is ugly, off by default
 set linebreak                  " but if you switch to wrapping, try not to wrap in the middle of words
@@ -59,6 +60,10 @@ let g:mapleader=","
 " Use \\ because we must escape the backslash.
 let maplocalleader="\\"
 
+" Faster saving.
+" We use ww because Vim will wait timeoutlen if there is only one w.
+nnoremap <localleader>ww :w<cr>
+
 " Beautify JSON with Python.
 " https://docs.python.org/3/library/json.html#json-commandline
 " Since = is the Vim operator to format a selected text, I'm using it here.
@@ -66,7 +71,7 @@ nnoremap <localleader>=j :%!python -m json.tool<cr>
 
 " Remove all trailing whitespace.
 " http://vi.stackexchange.com/a/2285/4919
-nnoremap <localleader>dw :let _s=@/<bar>:%s/\s\+$//e<bar>:let @/=_s<bar><cr>
+nnoremap <localleader>dws :let _s=@/<bar>:%s/\s\+$//e<bar>:let @/=_s<bar><cr>
 
 if has("spell") " spell checking was added in Vim 7
     set spelllang=en_us
