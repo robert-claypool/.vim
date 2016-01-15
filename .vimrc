@@ -7,8 +7,16 @@ if &compatible " if not already set
     set nocompatible
 endif
 
+" It's OK to have an unwritten buffer that's no longer visible.
+" See http://usevim.com/2012/10/19/vim101-set-hidden/
+" Vim keeps us safe from quitting altogether while having unwritten buffers,
+" so there's no chance of accidentally losing data.
+" Reminders:
+"   1. Edit multiple buffers using :bufdo
+"   2. Use :wq to write all
+set hidden
+
 syntax on                      " of course
-set hidden                     " hide buffers instead of closing them, http://usevim.com/2012/10/19/vim101-set-hidden/
 set vb                         " visual beep, make co-workers happier
 set t_Co=256                   " tell Vim that the terminal supports 256 colors
 set number                     " yay! line numbers
@@ -32,6 +40,7 @@ set history=500                " keep a longer history, 20 is the default
 set undolevels=500             " muchos levels of undo
 set scrolloff=3                " start scrolling a few lines before the border (more context around the cursor)
 set laststatus=2               " always show the status line
+set showmode                   " this is default for Vim, set here as a reminder
 
 " Build our custom status line.
 set statusline=
@@ -86,6 +95,7 @@ nnoremap <localleader>=j :%!python -m json.tool<cr>
 
 " Remove all trailing whitespace.
 " http://vi.stackexchange.com/a/2285/4919
+" Mnemonic for the sequence is 'd'elete 'w'hite 's'pace.
 nnoremap <localleader>dws :let _s=@/<bar>:%s/\s\+$//e<bar>:let @/=_s<bar><cr>
 
 if has("spell") " spell checking was added in Vim 7
