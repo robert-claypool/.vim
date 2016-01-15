@@ -159,12 +159,12 @@ function! WhoaTypos(fg,bg)
     " The A at the end of this line should be highlighted... A
 endfunction
 
-function! WhoaColorColumn(color)
+function! WhoaColorColumn(fg,bg)
     if exists('+colorcolumn') " short lines are more readable, so...
         " add a vertical line-length column at 79 characters
         " 79 is from https://www.python.org/dev/peps/pep-0008/#maximum-line-length
         set colorcolumn=79
-        exe 'highlight ColorColumn guibg='.a:color
+        exe 'highlight ColorColumn guifg='.a:fg.' guibg='.a:bg
     endif
 endfunction
 
@@ -174,7 +174,7 @@ if has("gui_running")
     highlight Comment guifg=gray42 " help my poor eyes
     call WhoaWhitespace("red")
     call WhoaTypos("black","yellow")
-    call WhoaColorColumn("coral4") " bold, eh?
+    call WhoaColorColumn("black","coral4") " bold, eh?
 else
     colorscheme desert256
 endif
@@ -204,11 +204,11 @@ if has('autocmd')
                 autocmd InsertEnter * colorscheme base16-eighties
                 autocmd InsertEnter * call WhoaWhitespace("red")
                 autocmd InsertEnter * call WhoaTypos("black","yellow")
-                autocmd InsertEnter * call WhoaColorColumn("DarkOliveGreen3")
+                autocmd InsertEnter * call WhoaColorColumn("black","DarkOliveGreen3")
                 autocmd InsertLeave * colorscheme base16-pop
                 autocmd InsertLeave * call WhoaWhitespace("red")
                 autocmd InsertLeave * call WhoaTypos("black","yellow")
-                autocmd InsertLeave * call WhoaColorColumn("coral4")
+                autocmd InsertLeave * call WhoaColorColumn("black","coral4")
             augroup END
         endif
     endif
