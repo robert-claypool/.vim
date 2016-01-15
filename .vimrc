@@ -170,7 +170,7 @@ endfunction
 
 set background=dark " this only tells Vim what the terminal's backgound color looks like
 if has("gui_running")
-    colorscheme base16-pop         " http://chriskempson.github.io/base16
+    colorscheme base16-railscasts " http://chriskempson.github.io/base16
     highlight Comment guifg=gray42 " help my poor eyes
     call WhoaWhitespace("red")
     call WhoaTypos("black","yellow")
@@ -201,11 +201,11 @@ if has('autocmd')
     if version >= 700
         if has("gui_running")
             augroup mode_yo
-                autocmd InsertEnter * colorscheme base16-eighties
+                autocmd InsertEnter * colorscheme base16-flat
                 autocmd InsertEnter * call WhoaWhitespace("red")
                 autocmd InsertEnter * call WhoaTypos("black","yellow")
                 autocmd InsertEnter * call WhoaColorColumn("black","DarkOliveGreen3")
-                autocmd InsertLeave * colorscheme base16-pop
+                autocmd InsertLeave * colorscheme base16-railscasts
                 autocmd InsertLeave * call WhoaWhitespace("red")
                 autocmd InsertLeave * call WhoaTypos("black","yellow")
                 autocmd InsertLeave * call WhoaColorColumn("black","coral4")

@@ -5,7 +5,7 @@ if has("gui_running")
     elseif has("gui_macvim")
         set guifont=Menlo\ Regular:h14
     elseif has("gui_win32")
-        set guifont=Consolas:h11:cANSI
+        set guifont=Consolas:h12:cANSI
     endif
 
     " Make the window larger than gVim's default
