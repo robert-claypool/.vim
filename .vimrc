@@ -149,6 +149,16 @@ function! WhoaWhitespace(color)
     match ExtraWhitespace /\s\+$/ " credit to http://stackoverflow.com/a/4617156/23566
 endfunction
 
+function! WhoaTypos(fg,bg)
+    " So this is a weird one...
+    " I tend to typo an A on the end of lines because I so frequently
+    " get into INSERT mode trying to use the A key mapping (append at EOL).
+    " If I'm already in INSERT mode, then the A key stroke is a typo.
+    exe 'highlight MyTypos ctermfg='.a:fg.' ctermbg='.a:bg.' guifg='.a:fg.' guibg='.a:bg
+    syntax match MyTypos /A$/ containedin=ALL
+    " The A at the end of this line should be highlighted... A
+endfunction
+
 function! WhoaColorColumn(color)
     if exists('+colorcolumn') " short lines are more readable, so...
         " add a vertical line-length column at 79 characters
@@ -163,6 +173,7 @@ if has("gui_running")
     colorscheme base16-pop         " http://chriskempson.github.io/base16
     highlight Comment guifg=gray42 " help my poor eyes
     call WhoaWhitespace("red")
+    call WhoaTypos("black","yellow")
     call WhoaColorColumn("coral4") " bold, eh?
 else
     colorscheme desert256
@@ -192,9 +203,11 @@ if has('autocmd')
             augroup mode_yo
                 autocmd InsertEnter * colorscheme base16-eighties
                 autocmd InsertEnter * call WhoaWhitespace("red")
+                autocmd InsertEnter * call WhoaTypos("black","yellow")
                 autocmd InsertEnter * call WhoaColorColumn("DarkOliveGreen3")
                 autocmd InsertLeave * colorscheme base16-pop
                 autocmd InsertLeave * call WhoaWhitespace("red")
+                autocmd InsertLeave * call WhoaTypos("black","yellow")
                 autocmd InsertLeave * call WhoaColorColumn("coral4")
             augroup END
         endif
