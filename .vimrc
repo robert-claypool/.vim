@@ -16,6 +16,7 @@ set cursorline                 " highlight current line
 set showmatch                  " briefly jump to the matching brace when you insert one
 set incsearch                  " search as characters are typed
 set ignorecase                 " ignore case when searching
+set smartcase                  " ignore case if search pattern is all lowercase
 set hlsearch                   " highlight matches
 set nowrap                     " wrapping is ugly, off by default
 set linebreak                  " but if you switch to wrapping, try not to wrap in the middle of words
@@ -27,7 +28,8 @@ set nrformats=hex              " because I literally never deal with octal, incr
 set splitbelow                 " horizontal windows to appear below the old window
 set foldcolumn=1               " add some left margin
 set encoding=utf8              " the Vim default is Latin-1, yikes! see http://unix.stackexchange.com/a/23414
-set history=200                " keep a longer history, 20 is the default
+set history=500                " keep a longer history, 20 is the default
+set undolevels=500             " muchos levels of undo
 set scrolloff=3                " start scrolling a few lines before the border (more context around the cursor)
 set laststatus=2               " always show the status line
 
@@ -287,3 +289,6 @@ inoremap jj <esc>
 " nopaste is the default but we set it here explicitly as a reminder that
 " setting the 'paste' option will disable other options like inoremap, see :help 'paste'
 set nopaste
+
+" Enable quick switching of "paste mode"
+set pastetoggle=<F2>
