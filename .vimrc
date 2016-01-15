@@ -65,6 +65,18 @@ nnoremap <localleader>ww :w<cr>|  " faster save
 nnoremap <localleader>qq :q<cr>|  " faster quit
 nnoremap <localleader>wq :wq<cr>| " faster quit and save
 
+" Windows management
+nnoremap <localleader>wh <C-W>H|  " align window LEFT of others
+nnoremap <localleader>wj <C-W>J|  " align window BELOW others
+nnoremap <localleader>wk <C-W>K|  " align window ABOVE others
+nnoremap <localleader>wl <C-W>L|  " align window RIGHT of others
+
+" Windows navigation
+nnoremap <localleader>hh <C-W>h|  " jump cursor, window to the LEFT
+nnoremap <localleader>jj <C-W>j|  " jump cursor, window to the BELOW
+nnoremap <localleader>kk <C-W>k|  " jump cursor, window to the ABOVE
+nnoremap <localleader>ll <C-W>l|  " jump cursor, window to the RIGHT
+
 " Beautify JSON with Python.
 " https://docs.python.org/3/library/json.html#json-commandline
 " Since = is the Vim operator to format a selected text, I'm using it here.
