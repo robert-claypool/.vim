@@ -19,7 +19,7 @@ set hidden
 syntax on                      " of course
 set vb                         " visual beep, make co-workers happier
 set t_Co=256                   " tell Vim that the terminal supports 256 colors
-set number                     " yay! line numbers
+set relativenumber             " use NumberToggle() for standard line numbers... see below.
 set cursorline                 " highlight current line
 set showmatch                  " briefly jump to the matching brace when you insert one
 set incsearch                  " search as characters are typed
@@ -62,7 +62,7 @@ set statusline+=%{&paste?'[paste]':''} " warn if &paste is set
 set statusline+=%*                     " return to normal highlighting
 
 set showcmd         " shows the current command hence the leader key for as long as it is active
-set timeoutlen=2000 " keep the <leader> active for 2 seconds (default is 1)
+set timeoutlen=1500 " keep the <leader> active for 1.5 seconds (default is 1)
 let mapleader=","   " backslash is the default, comma is easier
 let g:mapleader=","
 
@@ -70,6 +70,17 @@ let g:mapleader=","
 " global plugins to clash with mappings for filetype plugins.
 " Use \\ because we must escape the backslash.
 let maplocalleader="\\"
+
+function! NumberToggle()
+  if(&relativenumber == 1)
+    set relativenumber!
+    set number
+  else
+    set relativenumber "for seeing jump distances 12j or 13j, 8k or 9k
+    set number!
+  endif
+endfunc
+nnoremap <localleader>nt :call NumberToggle()<cr>
 
 " We use ww and qq because Vim will wait timeoutlen if there is only one w or q.
 nnoremap <localleader>ww :w<cr>|  " faster save
