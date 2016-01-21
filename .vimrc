@@ -138,20 +138,6 @@ if exists('g:loaded_sqlutilities')
     nmap <localleader>scp  <plug>SQLU_CreateProcedure<cr>
 endif
 
-set wildmenu                   " command line completion, try it with ':color <Tab>'
-set wildmode=longest:full,full " complete till the longest common string and start wildmenu, subsequent tabs cycle the menu options
-
-" Ignore various binary/compiled/transient files.
-set wildignore=*.o,*.obj,*~,*.py[cod],*.swp
-set wildignore+=*.exe,*.msi,*.dll,*.pdb
-set wildignore+=*.png,*.jpg,*.jpeg,*.gif,*.pdf,*.zip,*.7z
-set wildignore+=*.mxd,*.msd " Esri ArcGIS stuff
-if has("win16") || has("win32")
-    set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
-else
-    set wildignore+=.git\*,.hg\*,.svn\*
-endif
-
 " Whitespace and color column highlighting are wrapped in a functions because
 " we need to call them when the colorscheme is changed
 " (which happens a lot, see mode_yo below).
@@ -225,10 +211,49 @@ if has('autocmd')
     endif
 endif
 
-" The default viewdir, used by :mkview, is a poor choice on Windows,
-" change it to a path that won't need Administrator rights to create.
+" Command line completion, try it with ':color <Tab>'.
+set wildmenu
+" Complete till the longest common string and start wildmenu, subsequent tabs cycle the menu options.
+set wildmode=longest:full,full
+" Ignore various binary/compiled/transient files.
+set wildignore=*.o,*.obj,*~,*.py[cod],*.swp
+set wildignore+=*.exe,*.msi,*.dll,*.pdb
+set wildignore+=*.png,*.jpg,*.jpeg,*.gif,*.pdf,*.zip,*.7z
+set wildignore+=*.mxd,*.msd " Esri ArcGIS stuff
 if has("win16") || has("win32")
-    set viewdir=~/vimfiles/view
+    set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
+else
+    set wildignore+=.git\*,.hg\*,.svn\*
+endif
+
+" I'm wrapping all this in a Windows check until I have time to test on Linux.
+if has("win16") || has("win32")
+    " Vim backups are just a failsafe. Most files are already in source control.
+    " Here we use our special ~/vimfiles folder, see .gitignore and README.md.
+    " The double tailing slash tells Vim to store files using full paths,
+    " thus if you edit multiple foo.txt files, they won't clobber your backups.
+    set backupdir=~/vimfiles/vim-backups//
+    " ~ is the default extension, use .bak instead.
+    set backupext=.bak
+    exe "set wildignore+=*" . &backupext
+    set backup
+
+    " Swap files go under vimfiles too.
+    set directory=~/vimfiles/vim-swaps//
+
+    " Undo files allow us to use undos after exiting and restarting Vim.
+    " This is only present in 7.3+, see :help undo-persistence
+    if exists("+undofile")
+        " Like swaps and backups, they go under vimfiles.
+        set undodir=~/vimfiles/vim-undos//
+        set undolevels=500   " muchos levels of undo
+        set undoreload=10000 " max lines to save for undo on a buffer reload
+        set undofile
+    endif
+
+    " The default viewdir, used by :mkview, is a poor choice on Windows,
+    " vimfiles/ is a path that won't need Administrator rights.
+    set viewdir=~/vimfiles/vim-views//
 endif
 
 " A file type plugin (ftplugin) is a script that is run automatically

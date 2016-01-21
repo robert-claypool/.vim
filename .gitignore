@@ -1,4 +1,9 @@
 # settings saved by :mkview can be ignored
-view
+vim-views
+# backups, swaps, and undos too
+vim-backups
+vim-swaps
+vim-views
+vim-undos
 # putting the custom words list online can leak info on what you are writing
 spell
