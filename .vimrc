@@ -16,7 +16,15 @@ endif
 "   2. Use :wq to write all
 set hidden
 
-syntax on                      " of course
+" Remove ALL autocommands to prevent them from being loaded twice.
+if has('autocmd')
+  autocmd!
+endif
+
+if has('syntax')
+    syntax on " of course
+endif
+
 set vb                         " visual beep, make co-workers happier
 set t_Co=256                   " tell Vim that the terminal supports 256 colors
 set relativenumber             " use NumberToggle() for standard line numbers... see below.
@@ -33,14 +41,21 @@ set title                      " show xterm title, does nothing in GVim
 set backspace=indent,eol,start " allow the backspace key to erase previously entered text, autoindent, and newlines
 set autoindent                 " autocopy the indentation from the previous line
 set nrformats=hex              " because I literally never deal with octal, incrementing 06 (CTRL-A) should result in 07
-set splitbelow                 " horizontal windows to appear below the old window
 set foldcolumn=1               " add some left margin
 set encoding=utf8              " the Vim default is Latin-1, yikes! see http://unix.stackexchange.com/a/23414
 set history=500                " keep a longer history, 20 is the default
 set undolevels=500             " muchos levels of undo
 set scrolloff=3                " start scrolling a few lines before the border (more context around the cursor)
+set sidescrolloff=3            " don't scroll any closer to the left or right
 set laststatus=2               " always show the status line
 set showmode                   " this is default for Vim, set here as a reminder
+
+" Don't try to syntax highlight huge lines.
+set synmaxcol=500
+
+" Open new split panes to the right and bottom, which feels more natural.
+set splitbelow
+set splitright
 
 " Build our custom status line.
 set statusline=
@@ -155,6 +170,10 @@ function! WhoaTypos(fg,bg)
     syntax match MyTypos /A$/ containedin=ALL
     " The A at the end of this line should be highlighted... A
 endfunction
+
+" Autofix these typos.
+iabbrev teh the
+iabbrev Teh The
 
 function! WhoaColorColumn(fg,bg)
     if exists('+colorcolumn') " short lines are more readable, so...
@@ -351,3 +370,5 @@ set nopaste
 
 " Enable quick switching of "paste mode"
 set pastetoggle=<F2>
+
+set secure
