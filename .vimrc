@@ -124,6 +124,12 @@ nnoremap <localleader>=j :%!python -m json.tool<cr>
 " Mnemonic for the sequence is 'd'elete 'w'hite 's'pace.
 nnoremap <localleader>dws :let _s=@/<bar>:%s/\s\+$//e<bar>:let @/=_s<bar><cr>
 
+" While NerdTree plugin is installed, vim-vinegar triggers it by default.
+" If for some reason that's not working, uncomment the next line:
+" let NERDTreeHijackNetrw=1
+" See http://vimcasts.org/blog/2013/01/oil-and-vinegar-split-windows-and-project-drawer/
+" And https://www.reddit.com/r/vim/comments/22ztqp/why_does_nerdtree_exist_whats_wrong_with_netrw/
+
 if has("spell") " spell checking was added in Vim 7
     set spelllang=en_us
     nnoremap <localleader>ss :setlocal spell!<cr>
