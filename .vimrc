@@ -49,6 +49,7 @@ set scrolloff=3                " start scrolling a few lines before the border (
 set sidescrolloff=3            " don't scroll any closer to the left or right
 set laststatus=2               " always show the status line
 set showmode                   " this is default for Vim, set here as a reminder
+set autoread                   " auto reload files changed outside of Vim
 
 " Don't try to syntax highlight huge lines.
 set synmaxcol=500
@@ -157,6 +158,16 @@ if exists('g:loaded_sqlutilities')
     nmap <localleader>scd  <plug>SQLU_GetColumnDef<cr>
     nmap <localleader>scdt <plug>SQLU_GetColumnDataType<cr>
     nmap <localleader>scp  <plug>SQLU_CreateProcedure<cr>
+endif
+
+if executable('ag')
+    " * (super star) searches the CURRENT buffer for the word under your cursor
+    " bind \* to search ALL OPEN AND SAVED buffers. This will not find changes
+    " in modified buffers, since Ag can only find what is on disk.
+    nnoremap <localleader>* :AgBuffer <c-r><c-w><cr>
+
+    " ag is fast enough that CtrlP doesn't need to cache
+    let g:ctrlp_use_caching = 0
 endif
 
 " Whitespace and color column highlighting are wrapped in a functions because
@@ -354,6 +365,16 @@ noremap  <right> <nop>
 
 " Typo hitting F1 will open "help" when you probably just wanted to get out of insert mode, fix that.
 inoremap <f1> <esc>
+
+" I never use ; in normal mode.
+" Make it an alias for <shift>;
+nnoremap ; :
+
+" In insert mode, pressing Ctrl-u deletes text you've typed in the
+" current line, and Ctrl-w deletes the word before the cursor.
+" You can't undo these deletions! Fix that.
+inoremap <c-u> <c-g>u<c-u>
+inoremap <c-w> <c-g>u<c-w>
 
 " Have dedicated tab switchers.
 inoremap <f7> gT
