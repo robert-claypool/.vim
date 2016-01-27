@@ -58,25 +58,6 @@ set synmaxcol=500
 set splitbelow
 set splitright
 
-" Build our custom status line.
-set statusline=
-set statusline+=%-3.3n\        " buffer number
-set statusline+=%f\            " filename
-set statusline+=%h%m%r%w       " status flags
-if exists("g:loaded_fugitive") " git info
-    set statusline+=%{fugitive#statusline()}
-endif
-set statusline+=\[%{strlen(&ft)?&ft:'none'}, " file type
-set statusline+=%{strlen(&fenc)?&fenc:&enc}, " encoding
-set statusline+=%{&fileformat}]              " file format
-set statusline+=%=              " right align the remainder
-set statusline+=%-14(%l,%c%V%)  " line, character
-set statusline+=%<%P            " file position
-set statusline+=\ \             " spacer
-set statusline+=%#error#               " switch to error highlighting
-set statusline+=%{&paste?'[paste]':''} " warn if &paste is set
-set statusline+=%*                     " return to normal highlighting
-
 set showcmd         " shows the current command hence the leader key for as long as it is active
 set timeoutlen=1500 " keep the <leader> active for 1.5 seconds (default is 1)
 let mapleader=","   " backslash is the default, comma is easier
@@ -398,4 +379,25 @@ set nopaste
 " Enable quick switching of "paste mode"
 set pastetoggle=<F2>
 
+" Build our custom status line.
+" None of this matters if you are using vim-airline, which you should.
+set statusline=
+set statusline+=%-3.3n\        " buffer number
+set statusline+=%f\            " filename
+set statusline+=%h%m%r%w       " status flags
+if exists("g:loaded_fugitive") " git info
+    set statusline+=%{fugitive#statusline()}
+endif
+set statusline+=\[%{strlen(&ft)?&ft:'none'}, " file type
+set statusline+=%{strlen(&fenc)?&fenc:&enc}, " encoding
+set statusline+=%{&fileformat}]              " file format
+set statusline+=%=              " right align the remainder
+set statusline+=%-14(%l,%c%V%)  " line, character
+set statusline+=%<%P            " file position
+set statusline+=\ \             " spacer
+set statusline+=%#error#               " switch to error highlighting
+set statusline+=%{&paste?'[paste]':''} " warn if &paste is set
+set statusline+=%*                     " return to normal highlighting
+
+" Keep this last.
 set secure
