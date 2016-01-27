@@ -285,6 +285,8 @@ if has('autocmd')
         autocmd BufNewFile,BufRead *.config set filetype=javascript
         autocmd BufNewFile,BufRead db.config set filetype=xml
         autocmd BufNewFile,BufRead Web.config set filetype=xml
+        " Vim detects md files as modula2, except for README.md. Fix that.
+        autocmd BufNewFile,BufReadPost *.md set filetype=markdown
     augroup END
 endif
 
