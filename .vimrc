@@ -313,13 +313,17 @@ endif
 if has("win32")
     " Vim uses an external EditorConfig Core library to parse .editorconfig
     " files and pass back the properties that should be used.
-    let ecpath = expand("~")."\\vimfiles\\lib\\editorconfig-0.12.0-Windows-AMD64.exe"
+    let ecpath=expand("~")."\\vimfiles\\lib\\editorconfig-0.12.0-Windows-AMD64.exe"
     if filereadable(ecpath)
-        let g:EditorConfig_exec_path = ecpath
+        let g:EditorConfig_exec_path=ecpath
         " Ensure that this plugin works well with vim-fugitive.
-        let g:EditorConfig_exclude_patterns = ['fugitive://.*']
+        let g:EditorConfig_exclude_patterns=['fugitive://.*']
     endif
 endif
+
+" For plugin nathanaelkane/vim-indent-guides
+let g:indent_guides_start_level=2
+let g:indent_guides_guide_size=1
 
 " We default to LF line endings for new files.
 " http://vim.wikia.com/wiki/Change_end-of-line_format_for_dos-mac-unix
@@ -331,10 +335,10 @@ set fileformat=unix
 set fileformats=unix,dos
 
 " Specify additional HTML tags to auto indent.
-let g:html_indent_inctags = "html,body,head,tbody"
+let g:html_indent_inctags="html,body,head,tbody"
 " Indent after <script> and <style> tags too.
-let g:html_indent_script1 = "inc"
-let g:html_indent_style1 = "inc"
+let g:html_indent_script1="inc"
+let g:html_indent_style1="inc"
 
 " Disable arrow keys for navigation, use `hjkl` and love it.
 inoremap <up>    <nop>
