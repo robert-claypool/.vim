@@ -324,6 +324,7 @@ endif
 " For plugin nathanaelkane/vim-indent-guides
 let g:indent_guides_start_level=2
 let g:indent_guides_guide_size=1
+let g:indent_guides_enable_on_vim_startup=1
 
 " We default to LF line endings for new files.
 " http://vim.wikia.com/wiki/Change_end-of-line_format_for_dos-mac-unix
