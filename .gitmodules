@@ -4,18 +4,12 @@
 [submodule "bundle/nerdtree"]
 	path = bundle/nerdtree
 	url = git@github.com:scrooloose/nerdtree.git
-[submodule "bundle/vim-colors-solarized"]
-	path = bundle/vim-colors-solarized
-	url = git@github.com:altercation/vim-colors-solarized.git
 [submodule "bundle/ctrl-p"]
 	path = bundle/ctrl-p
 	url = git@github.com:kien/ctrlp.vim.git
 [submodule "bundle/fugitive"]
 	path = bundle/fugitive
 	url = git@github.com:tpope/vim-fugitive.git
-[submodule "bundle/align"]
-	path = bundle/align
-	url = git@github.com:vim-scripts/Align.git
 [submodule "bundle/sql-utilities"]
 	path = bundle/sql-utilities
 	url = git@github.com:robert-claypool/SQLUtilities.git
@@ -46,3 +40,6 @@
 [submodule "bundle/vim-fontsize"]
 	path = bundle/vim-fontsize
 	url = git@github.com:drmikehenry/vim-fontsize.git
+[submodule "bundle/vim-repeat"]
+	path = bundle/vim-repeat
+	url = git@github.com:tpope/vim-repeat.git
