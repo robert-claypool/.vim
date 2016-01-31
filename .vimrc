@@ -45,7 +45,7 @@ set foldcolumn=1               " add some left margin
 set encoding=utf8              " the Vim default is Latin-1, yikes! see http://unix.stackexchange.com/a/23414
 set history=500                " keep a longer history, 20 is the default
 set undolevels=500             " muchos levels of undo
-set scrolloff=3                " start scrolling a few lines before the border (more context around the cursor)
+set scrolloff=5                " start scrolling a few lines before the border (more context around the cursor)
 set sidescrolloff=3            " don't scroll any closer to the left or right
 set laststatus=2               " always show the status line
 set showmode                   " this is default for Vim, set here as a reminder
@@ -124,6 +124,13 @@ endif
 " Show special characters.
 if v:version >= 700
     set list listchars=tab:»-,trail:·,extends:→
+endif
+
+if v:version >= 703
+    " The default 'zip' cryptmethod is weak.
+    " 7.3 added blowfish which is strong.
+    " More at :help encryption
+    set cryptmethod=blowfish
 endif
 
 if exists('g:loaded_sqlutilities')
@@ -354,9 +361,9 @@ noremap  <right> <nop>
 " Typo hitting F1 will open "help" when you probably just wanted to get out of insert mode, fix that.
 inoremap <f1> <esc>
 
-" I never use ; in normal mode.
-" Make it an alias for <shift>;
-nnoremap ; :
+" ; repeats the last f/F/ t/T search
+" If you don't care about that, then make ; an alias for <shift>;
+" nnoremap ; :
 
 " In insert mode, pressing Ctrl-u deletes text you've typed in the
 " current line, and Ctrl-w deletes the word before the cursor.
