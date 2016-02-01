@@ -1,5 +1,10 @@
-" Extract plugins to a subdirectory under ~/.vim/bundle, pathogen will add them to the 'runtimepath'.
-call pathogen#infect()
+" Plugins will not load unless you have created the special ~/vimfiles folder, see .gitignore and README.md.
+if !empty(glob("~/vimfiles/autoload/pathogen.vim"))
+    " Extract plugins to a subdirectory under ~/.vim/bundle, pathogen will add them to the 'runtimepath'.
+    call pathogen#infect()
+else
+    echoerr "Plugins were not loaded. Please setup '~/vimfiles', see README.md"
+endif
 
 if &compatible " if not already set
     " Use Vim defaults (easier, more user friendly than vi defaults).
