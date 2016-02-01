@@ -63,13 +63,13 @@ set synmaxcol=500
 set splitbelow
 set splitright
 
-set showcmd         " shows the current command hence the leader key for as long as it is active
+set showcmd " shows the current command hence the leader key for as long as it is active
 
 " Time out on mapping after 2 seconds, time out on key codes after 100ms.
 " See ':help timeoutlen' and tpope/sensible-vim
 set timeout timeoutlen=2000 ttimeoutlen=100
 
-let mapleader=","   " backslash is the default, comma is easier
+let mapleader="," " backslash is the default, comma is easier
 let g:mapleader=","
 
 " Keep <Leader> and <LocalLeader> different to reduce chance of mappings from
@@ -82,7 +82,7 @@ function! NumberToggle()
     set relativenumber!
     set number
   else
-    set relativenumber "for seeing jump distances 12j or 13j, 8k or 9k
+    set relativenumber " for seeing jump distances 12j or 13j, 8k or 9k
     set number!
   endif
 endfunc
@@ -137,7 +137,7 @@ endif
 
 if v:version >= 703
     " The default 'zip' cryptmethod is weak.
-    " 7.3 added blowfish which is strong.
+    " 7.3 added blowfish which is stronger.
     " More at :help encryption
     set cryptmethod=blowfish
 endif
