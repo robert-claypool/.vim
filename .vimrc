@@ -64,7 +64,11 @@ set splitbelow
 set splitright
 
 set showcmd         " shows the current command hence the leader key for as long as it is active
-set timeoutlen=1500 " keep the <leader> active for 1.5 seconds (default is 1)
+
+" Time out on mapping after 2 seconds, time out on key codes after 100ms.
+" See ':help timeoutlen' and tpope/sensible-vim
+set timeout timeoutlen=2000 ttimeoutlen=100
+
 let mapleader=","   " backslash is the default, comma is easier
 let g:mapleader=","
 
