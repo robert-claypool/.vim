@@ -123,6 +123,7 @@ nnoremap <localleader>dws :let _s=@/<bar>:%s/\s\+$//e<bar>:let @/=_s<bar><cr>
 
 if has("spell") " spell checking was added in Vim 7
     set spelllang=en_us
+    set spellsuggest=best,10 " show only the top 10
     nnoremap <localleader>ss :setlocal spell!<cr>
     if has('autocmd')
         " turn on by default for files < 10K
@@ -198,10 +199,22 @@ function! WhoaColorColumn(fg,bg)
     endif
 endfunction
 
+function! TweakBase16()
+    " Override the diff-mode highlights of base16.
+    " See comments on https://github.com/chriskempson/base16-vim/commit/2606f91
+    highlight DiffAdd    term=bold ctermfg=0 ctermbg=2 guifg=#2b2b2b guibg=#a5c261
+    highlight DiffDelete term=bold ctermfg=0 ctermbg=1 gui=bold guifg=#2b2b2b guibg=#da4939
+    highlight DiffChange term=bold ctermfg=0 ctermbg=4 guifg=#2b2b2b guibg=#6d9cbe
+    highlight DiffText   term=reverse cterm=bold ctermfg=0 ctermbg=4 gui=bold guifg=#2b2b2b guibg=#6d9cbe
+    " And this helps my poor eyes
+    highlight Comment guifg=gray42
+endfunction
+
 set background=dark " this only tells Vim what the terminal's backgound color looks like
+
 if has("gui_running")
     colorscheme base16-railscasts " http://chriskempson.github.io/base16
-    highlight Comment guifg=gray42 " help my poor eyes
+    call TweakBase16()
     call WhoaWhitespace("red")
     call WhoaTypos("black","yellow")
     call WhoaColorColumn("black","coral4") " bold, eh?
@@ -232,10 +245,12 @@ if has('autocmd')
         if has("gui_running")
             augroup mode_yo
                 autocmd InsertEnter * colorscheme base16-flat
+                autocmd InsertEnter * call TweakBase16()
                 autocmd InsertEnter * call WhoaWhitespace("red")
                 autocmd InsertEnter * call WhoaTypos("black","yellow")
                 autocmd InsertEnter * call WhoaColorColumn("black","DarkOliveGreen3")
                 autocmd InsertLeave * colorscheme base16-railscasts
+                autocmd InsertLeave * call TweakBase16()
                 autocmd InsertLeave * call WhoaWhitespace("red")
                 autocmd InsertLeave * call WhoaTypos("black","yellow")
                 autocmd InsertLeave * call WhoaColorColumn("black","coral4")
