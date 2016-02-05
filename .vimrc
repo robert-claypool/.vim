@@ -490,5 +490,8 @@ let g:airline#extensions#whitespace#enabled=1
 let g:airline#extensions#syntastic#enabled=1
 let g:airline#extensions#tabline#tab_nr_type=1 " unique number for each tab
 
+" Potential lag fix, https://redd.it/1p0e46
+let g:matchparen_insert_timeout=5
+
 " Keep this last.
 set secure
