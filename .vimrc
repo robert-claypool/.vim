@@ -210,14 +210,22 @@ function! TweakBase16()
     highlight Comment guifg=gray42
 endfunction
 
+function! PostThemeSettings()
+    " Here we run stuff that must be applied after the theme has changed.
+    call TweakBase16()
+    call WhoaWhitespace('red')
+    call WhoaTypos('black','yellow')
+    if exists('g:loaded_airline')
+        exe 'AirlineRefresh'
+    endif
+endfunction
+
 set background=dark " this only tells Vim what the terminal's backgound color looks like
 
-if has("gui_running")
+if has('gui_running')
     colorscheme base16-railscasts " http://chriskempson.github.io/base16
-    call TweakBase16()
-    call WhoaWhitespace("red")
-    call WhoaTypos("black","yellow")
-    call WhoaColorColumn("black","coral4") " bold, eh?
+    call PostThemeSettings()
+    call WhoaColorColumn('black','coral4') " bold, eh?
 else
     colorscheme desert256
 endif
@@ -242,18 +250,14 @@ if has('autocmd')
 
     " Let's make it obvious if I'm in insert mode.
     if version >= 700
-        if has("gui_running")
+        if has('gui_running')
             augroup mode_yo
                 autocmd InsertEnter * colorscheme base16-flat
-                autocmd InsertEnter * call TweakBase16()
-                autocmd InsertEnter * call WhoaWhitespace("red")
-                autocmd InsertEnter * call WhoaTypos("black","yellow")
-                autocmd InsertEnter * call WhoaColorColumn("black","DarkOliveGreen3")
+                autocmd InsertEnter * call PostThemeSettings()
+                autocmd InsertEnter * call WhoaColorColumn('black','DarkOliveGreen3')
                 autocmd InsertLeave * colorscheme base16-railscasts
-                autocmd InsertLeave * call TweakBase16()
-                autocmd InsertLeave * call WhoaWhitespace("red")
-                autocmd InsertLeave * call WhoaTypos("black","yellow")
-                autocmd InsertLeave * call WhoaColorColumn("black","coral4")
+                autocmd InsertLeave * call PostThemeSettings()
+                autocmd InsertLeave * call WhoaColorColumn('black','coral4') " bold, eh?
             augroup END
         endif
     endif
@@ -423,9 +427,6 @@ set statusline=
 set statusline+=%-3.3n\        " buffer number
 set statusline+=%f\            " filename
 set statusline+=%h%m%r%w       " status flags
-if exists("g:loaded_fugitive") " git info
-    set statusline+=%{fugitive#statusline()}
-endif
 set statusline+=\[%{strlen(&ft)?&ft:'none'}, " file type
 set statusline+=%{strlen(&fenc)?&fenc:&enc}, " encoding
 set statusline+=%{&fileformat}]              " file format
@@ -436,6 +437,25 @@ set statusline+=\ \             " spacer
 set statusline+=%#error#               " switch to error highlighting
 set statusline+=%{&paste?'[paste]':''} " warn if &paste is set
 set statusline+=%*                     " return to normal highlighting
+
+" These are recommended by the Syntastic README
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+if !exists('g:airline_symbols')
+    let g:airline_symbols={}
+endif
+let g:airline_theme='molokai'
+" Enable powerline fonts if you have them installed.
+" https://powerline.readthedocs.org/en/master/installation.html
+" let g:airline_powerline_fonts=1
+let g:airline#extensions#branch#empty_message='no .git'
+let g:airline#extensions#tabline#enabled=1
+let g:airline#extensions#whitespace#enabled=1
+let g:airline#extensions#syntastic#enabled=1
+let g:airline#extensions#tabline#tab_nr_type=1 " unique number for each tab
 
 " Keep this last.
 set secure
