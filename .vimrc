@@ -399,6 +399,9 @@ inoremap <f1> <esc>
 inoremap <c-u> <c-g>u<c-u>
 inoremap <c-w> <c-g>u<c-w>
 
+" Make <space> in normal mode add a space.
+nnoremap <space> i<space><esc>l
+
 " Have dedicated tab switchers.
 inoremap <f7> gT
 inoremap <f8> gt
