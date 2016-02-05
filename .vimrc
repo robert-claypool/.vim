@@ -438,6 +438,39 @@ set statusline+=%#error#               " switch to error highlighting
 set statusline+=%{&paste?'[paste]':''} " warn if &paste is set
 set statusline+=%*                     " return to normal highlighting
 
+" https://github.com/Netherdrake/Dotfiles, <localleader>h[1-6]
+function! HiInterestingWord(n)
+    " Save our location.
+    normal! mz
+    " Yank the current word into the z register.
+    normal! "zyiw
+    " Calculate an arbitrary match ID.  Hopefully nothing else is using it.
+    let mid = 86750 + a:n
+    " Clear existing matches, but don't worry if they don't exist.
+    silent! call matchdelete(mid)
+    " Construct a literal pattern that has to match at boundaries.
+    let pat = '\V\<' . escape(@z, '\') . '\>'
+    " Actually match the words.
+    call matchadd("InterestingWord" . a:n, pat, 1, mid)
+    " Move back to our original location.
+    normal! `z
+endfunction
+
+nnoremap <localleader>h0 :call clearmatches()<CR>:noh<CR>
+nnoremap <silent> <localleader>h1 :call HiInterestingWord(1)<cr>
+nnoremap <silent> <localleader>h2 :call HiInterestingWord(2)<cr>
+nnoremap <silent> <localleader>h3 :call HiInterestingWord(3)<cr>
+nnoremap <silent> <localleader>h4 :call HiInterestingWord(4)<cr>
+nnoremap <silent> <localleader>h5 :call HiInterestingWord(5)<cr>
+nnoremap <silent> <localleader>h6 :call HiInterestingWord(6)<cr>
+
+highlight def InterestingWord1 guifg=#000000 ctermfg=16 guibg=#ffa724 ctermbg=214
+highlight def InterestingWord2 guifg=#000000 ctermfg=16 guibg=#aeee00 ctermbg=154
+highlight def InterestingWord3 guifg=#000000 ctermfg=16 guibg=#8cffba ctermbg=121
+highlight def InterestingWord4 guifg=#000000 ctermfg=16 guibg=#b88853 ctermbg=137
+highlight def InterestingWord5 guifg=#000000 ctermfg=16 guibg=#ff9eb8 ctermbg=211
+highlight def InterestingWord6 guifg=#000000 ctermfg=16 guibg=#ff2c4b ctermbg=195
+
 " These are recommended by the Syntastic README
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
