@@ -1,5 +1,5 @@
 " Plugins will not load unless you have created the special ~/vimfiles folder, see .gitignore and README.md.
-if !empty(glob("~/vimfiles/autoload/pathogen.vim"))
+if !empty(glob('~/vimfiles/autoload/pathogen.vim'))
     " Extract plugins to a subdirectory under ~/.vim/bundle, pathogen will add them to the 'runtimepath'.
     call pathogen#infect()
 else
@@ -69,13 +69,13 @@ set showcmd " shows the current command hence the leader key for as long as it i
 " See ':help timeoutlen' and tpope/sensible-vim
 set timeout timeoutlen=2000 ttimeoutlen=100
 
-let mapleader="," " backslash is the default, comma is easier
-let g:mapleader=","
+let mapleader=',' " backslash is the default, comma is easier
+let g:mapleader=','
 
 " Keep <Leader> and <LocalLeader> different to reduce chance of mappings from
 " global plugins to clash with mappings for filetype plugins.
 " Use \\ because we must escape the backslash.
-let maplocalleader="\\"
+let maplocalleader='\\'
 
 function! NumberToggle()
   if(&relativenumber == 1)
@@ -121,7 +121,7 @@ nnoremap <localleader>dws :let _s=@/<bar>:%s/\s\+$//e<bar>:let @/=_s<bar><cr>
 " See http://vimcasts.org/blog/2013/01/oil-and-vinegar-split-windows-and-project-drawer/
 " And https://www.reddit.com/r/vim/comments/22ztqp/why_does_nerdtree_exist_whats_wrong_with_netrw/
 
-if has("spell") " spell checking was added in Vim 7
+if has('spell') " spell checking was added in Vim 7
     set spelllang=en_us
     set spellsuggest=best,10 " show only the top 10
     nnoremap <localleader>ss :setlocal spell!<cr>
@@ -272,14 +272,14 @@ set wildignore=*.o,*.obj,*~,*.py[cod],*.swp
 set wildignore+=*.exe,*.msi,*.dll,*.pdb
 set wildignore+=*.png,*.jpg,*.jpeg,*.gif,*.pdf,*.zip,*.7z
 set wildignore+=*.mxd,*.msd " Esri ArcGIS stuff
-if has("win16") || has("win32")
+if has('win16') || has('win32')
     set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
 else
     set wildignore+=.git\*,.hg\*,.svn\*
 endif
 
 " I'm wrapping all this in a Windows check until I have time to test on Linux.
-if has("win16") || has("win32")
+if has('win16') || has('win32')
     " Vim backups are just a failsafe. Most files are already in source control.
     " Here we use our special ~/vimfiles folder, see .gitignore and README.md.
     " The double tailing slash tells Vim to store files using full paths,
@@ -287,7 +287,7 @@ if has("win16") || has("win32")
     set backupdir=~/vimfiles/vim-backups//
     " ~ is the default extension, use .bak instead.
     set backupext=.bak
-    exe "set wildignore+=*" . &backupext
+    exe 'set wildignore+=*' . &backupext
     set backup
 
     " Swap files go under vimfiles too.
@@ -295,7 +295,7 @@ if has("win16") || has("win32")
 
     " Undo files allow us to use undos after exiting and restarting Vim.
     " This is only present in 7.3+, see :help undo-persistence
-    if exists("+undofile")
+    if exists('+undofile')
         " Like swaps and backups, they go under vimfiles.
         set undodir=~/vimfiles/vim-undos//
         set undolevels=500   " muchos levels of undo
@@ -345,10 +345,10 @@ if has('autocmd')
     augroup END
 endif
 
-if has("win32")
+if has('win32')
     " Vim uses an external EditorConfig Core library to parse .editorconfig
     " files and pass back the properties that should be used.
-    let ecpath=expand("~")."\\vimfiles\\lib\\editorconfig-0.12.0-Windows-AMD64.exe"
+    let ecpath=expand('~').'\\vimfiles\\lib\\editorconfig-0.12.0-Windows-AMD64.exe'
     if filereadable(ecpath)
         let g:EditorConfig_exec_path=ecpath
         " Ensure that this plugin works well with vim-fugitive.
@@ -371,10 +371,10 @@ set fileformat=unix
 set fileformats=unix,dos
 
 " Specify additional HTML tags to auto indent.
-let g:html_indent_inctags="html,body,head,tbody"
+let g:html_indent_inctags='html,body,head,tbody'
 " Indent after <script> and <style> tags too.
-let g:html_indent_script1="inc"
-let g:html_indent_style1="inc"
+let g:html_indent_script1='inc'
+let g:html_indent_style1='inc'
 
 " Disable arrow keys for navigation, use `hjkl` and love it.
 inoremap <up>    <nop>
