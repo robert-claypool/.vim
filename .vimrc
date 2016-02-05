@@ -393,7 +393,7 @@ inoremap <f1> <esc>
 " If you don't care about that, then make ; an alias for <shift>;
 " nnoremap ; :
 
-" In insert mode, pressing Ctrl-u deletes text you've typed in the
+" In insert mode, pressing Ctrl-u deletes text you've typed in t
 " current line, and Ctrl-w deletes the word before the cursor.
 " You can't undo these deletions! Fix that.
 inoremap <c-u> <c-g>u<c-u>
@@ -401,6 +401,12 @@ inoremap <c-w> <c-g>u<c-w>
 
 " Make <space> in normal mode add a space.
 nnoremap <space> i<space><esc>l
+
+" Keep search matches in the middle of the window:
+" zz scrolls the cursor to center
+" zv opens just enough folds to make that line not folded
+nnoremap n nzzzv
+nnoremap N Nzzzv
 
 " Have dedicated tab switchers.
 inoremap <f7> gT
