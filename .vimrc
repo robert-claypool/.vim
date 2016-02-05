@@ -69,13 +69,13 @@ set showcmd " shows the current command hence the leader key for as long as it i
 " See ':help timeoutlen' and tpope/sensible-vim
 set timeout timeoutlen=2000 ttimeoutlen=100
 
-let mapleader=',' " backslash is the default, comma is easier
-let g:mapleader=','
+let mapleader="," " backslash is the default, comma is easier
+let g:mapleader=","
 
 " Keep <Leader> and <LocalLeader> different to reduce chance of mappings from
 " global plugins to clash with mappings for filetype plugins.
 " Use \\ because we must escape the backslash.
-let maplocalleader='\\'
+let maplocalleader="\\"
 
 function! NumberToggle()
   if(&relativenumber == 1)
