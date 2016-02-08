@@ -143,31 +143,6 @@ if v:version >= 703
     set cryptmethod=blowfish
 endif
 
-if exists('g:loaded_sqlutilities')
-    " add mappings for SQLUtilities.vim, mnemonic explanation:
-    " s   - sql
-    " f   - format
-    " cl  - column list
-    " cd  - column definition
-    " cdt - column datatype
-    " cp  - create procedure
-    vmap <localleader>sf   <plug>SQLU_Formatter<cr>
-    nmap <localleader>scl  <plug>SQLU_CreateColumnList<cr>
-    nmap <localleader>scd  <plug>SQLU_GetColumnDef<cr>
-    nmap <localleader>scdt <plug>SQLU_GetColumnDataType<cr>
-    nmap <localleader>scp  <plug>SQLU_CreateProcedure<cr>
-endif
-
-if executable('ag')
-    " * (super star) searches the CURRENT buffer for the word under your cursor
-    " bind \* to search ALL OPEN AND SAVED buffers. This will not find changes
-    " in modified buffers, since Ag can only find what is on disk.
-    nnoremap <localleader>* :AgBuffer <c-r><c-w><cr>
-
-    " ag is fast enough that CtrlP doesn't need to cache
-    let g:ctrlp_use_caching = 0
-endif
-
 " Whitespace and color column highlighting are wrapped in a functions because
 " we need to call them when the colorscheme is changed
 " (which happens a lot, see mode_yo below).
@@ -321,7 +296,7 @@ if has('autocmd')
         autocmd BufNewFile,BufRead db.config set filetype=xml
         autocmd BufNewFile,BufRead Web.config set filetype=xml
         " Vim detects md files as modula2, except for README.md. Fix that.
-        autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+        autocmd BufNewFile,BufReadPost *.{md,markdown} set filetype=markdown
     augroup END
 endif
 
@@ -344,22 +319,6 @@ if has('autocmd')
         autocmd FileType python     setlocal softtabstop=4|setlocal shiftwidth=4|setlocal expandtab|setlocal tabstop=4
     augroup END
 endif
-
-if has('win32')
-    " Vim uses an external EditorConfig Core library to parse .editorconfig
-    " files and pass back the properties that should be used.
-    let ecpath=expand('~').'\\vimfiles\\lib\\editorconfig-0.12.0-Windows-AMD64.exe'
-    if filereadable(ecpath)
-        let g:EditorConfig_exec_path=ecpath
-        " Ensure that this plugin works well with vim-fugitive.
-        let g:EditorConfig_exclude_patterns=['fugitive://.*']
-    endif
-endif
-
-" For plugin nathanaelkane/vim-indent-guides
-let g:indent_guides_start_level=2
-let g:indent_guides_guide_size=1
-let g:indent_guides_enable_on_vim_startup=1
 
 " We default to LF line endings for new files.
 " http://vim.wikia.com/wiki/Change_end-of-line_format_for_dos-mac-unix
@@ -480,27 +439,101 @@ highlight def InterestingWord4 guifg=#000000 ctermfg=16 guibg=#b88853 ctermbg=13
 highlight def InterestingWord5 guifg=#000000 ctermfg=16 guibg=#ff9eb8 ctermbg=211
 highlight def InterestingWord6 guifg=#000000 ctermfg=16 guibg=#ff2c4b ctermbg=195
 
-" These are recommended by the Syntastic README
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
-if !exists('g:airline_symbols')
-    let g:airline_symbols={}
-endif
-let g:airline_theme='molokai'
-" Enable powerline fonts if you have them installed.
-" https://powerline.readthedocs.org/en/master/installation.html
-" let g:airline_powerline_fonts=1
-let g:airline#extensions#branch#empty_message='no .git'
-let g:airline#extensions#tabline#enabled=1
-let g:airline#extensions#whitespace#enabled=1
-let g:airline#extensions#syntastic#enabled=1
-let g:airline#extensions#tabline#tab_nr_type=1 " unique number for each tab
-
 " Potential lag fix, https://redd.it/1p0e46
 let g:matchparen_insert_timeout=5
+
+function! SetPluginOptions()
+    if exists('g:loaded_sqlutilities')
+        echom "Configuring SQL Utilities..."
+        " add mappings for SQLUtilities.vim, mnemonic explanation:
+        " s   - sql
+        " f   - format
+        " cl  - column list
+        " cd  - column definition
+        " cdt - column datatype
+        " cp  - create procedure
+        vmap <localleader>sf   <plug>SQLU_Formatter<cr>
+        nmap <localleader>scl  <plug>SQLU_CreateColumnList<cr>
+        nmap <localleader>scd  <plug>SQLU_GetColumnDef<cr>
+        nmap <localleader>scdt <plug>SQLU_GetColumnDataType<cr>
+        nmap <localleader>scp  <plug>SQLU_CreateProcedure<cr>
+    endif
+
+    if executable('ag')
+        " * (super star) searches the CURRENT buffer for the word under your cursor
+        " bind \* to search ALL OPEN AND SAVED buffers. This will not find changes
+        " in modified buffers, since Ag can only find what is on disk.
+        nnoremap <localleader>* :AgBuffer <c-r><c-w><cr>
+
+        if exists('g:loaded_ctrlp')
+            echom "Configuring CtrlP..."
+            " ag is fast enough that CtrlP doesn't need to cache
+            let g:ctrlp_use_caching = 0
+        endif
+    endif
+
+    if has('win32')
+        if exists('g:loaded_EditorConfig')
+            echom "Configuring Editor Config..."
+            " Vim uses an external EditorConfig Core library to parse .editorconfig
+            " files and pass back the properties that should be used.
+            let ecpath=expand('~').'\\vimfiles\\lib\\editorconfig-0.12.0-Windows-AMD64.exe'
+            if filereadable(ecpath)
+                let g:EditorConfig_exec_path=ecpath
+                " Ensure that this plugin works well with vim-fugitive.
+                let g:EditorConfig_exclude_patterns=['fugitive://.*']
+            endif
+        endif
+    endif
+
+    if exists('g:loaded_syntastic_plugin')
+        echom "Configuring Syntastic..."
+        " These are recommended by the Syntastic README
+        let g:syntastic_always_populate_loc_list = 1
+        let g:syntastic_auto_loc_list = 1
+        let g:syntastic_check_on_open = 1
+        let g:syntastic_check_on_wq = 0
+    endif
+
+    if exists('g:loaded_airline')
+        echom "Configuring Airline..."
+        if !exists('g:airline_symbols')
+            let g:airline_symbols={}
+        endif
+        let g:airline_theme='molokai'
+        " Enable powerline fonts if you have them installed.
+        " https://powerline.readthedocs.org/en/master/installation.html
+        " let g:airline_powerline_fonts=1
+        let g:airline#extensions#branch#empty_message='no .git'
+        let g:airline#extensions#tabline#enabled=1
+        let g:airline#extensions#whitespace#enabled=1
+        let g:airline#extensions#syntastic#enabled=1
+        let g:airline#extensions#tabline#tab_nr_type=1 " unique number for each tab
+    endif
+
+    if exists('g:loaded_gundo')
+        echom "Configuring Gundo..."
+        nnoremap <localleader>dd :GundoToggle<cr>
+    endif
+
+    if exists('g:loaded_indent_guides')
+        echom "Configuring Indent Guides..."
+        " For plugin nathanaelkane/vim-indent-guides
+        let g:indent_guides_start_level=2
+        let g:indent_guides_guide_size=1
+        let g:indent_guides_enable_on_vim_startup=1
+    endif
+
+    echom "Ready."
+endfunction
+
+if has('autocmd')
+    augroup plugin_setup
+        " Plugins are loaded *after* Vim has finished processing .vimrc,
+        " so we test for their existance and do stuff on VimEnter.
+        autocmd VimEnter * call SetPluginOptions()
+    augroup END
+endif
 
 " Keep this last.
 set secure
