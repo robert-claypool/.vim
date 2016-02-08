@@ -126,8 +126,8 @@ if has('spell') " spell checking was added in Vim 7
     set spellsuggest=best,10 " show only the top 10
     nnoremap <localleader>ss :setlocal spell!<cr>
     if has('autocmd')
-        " turn on by default for files < 10K
-        autocmd Filetype * if getfsize(@%) < 10240 | set spell | endif
+        " turn on by default for files < 20K
+        autocmd Filetype * if getfsize(@%) < 20480 | set spell | endif
     endif
 endif
 
@@ -195,7 +195,7 @@ function! PostThemeSettings()
     endif
 endfunction
 
-set background=dark " this only tells Vim what the terminal's backgound color looks like
+set background=dark " this only tells Vim what the terminal's background color looks like
 
 if has('gui_running')
     colorscheme base16-railscasts " http://chriskempson.github.io/base16
@@ -226,13 +226,18 @@ if has('autocmd')
     " Let's make it obvious if I'm in insert mode.
     if version >= 700
         if has('gui_running')
+            if !exists('g:very_visual_mode_switching')
+                " Normally our InsertEnter/InsertLeave commands are fine, but
+                " Vim Multiple Cursors needs to temporarily disable them.
+                let g:very_visual_mode_switching = 1
+            endif
             augroup mode_yo
-                autocmd InsertEnter * colorscheme base16-flat
-                autocmd InsertEnter * call PostThemeSettings()
-                autocmd InsertEnter * call WhoaColorColumn('black','DarkOliveGreen3')
-                autocmd InsertLeave * colorscheme base16-railscasts
-                autocmd InsertLeave * call PostThemeSettings()
-                autocmd InsertLeave * call WhoaColorColumn('black','coral4') " bold, eh?
+                autocmd InsertEnter * if g:very_visual_mode_switching | colorscheme base16-flat | endif
+                autocmd InsertEnter * if g:very_visual_mode_switching | call PostThemeSettings() | endif
+                autocmd InsertEnter * if g:very_visual_mode_switching | call WhoaColorColumn('black','DarkOliveGreen3') | endif
+                autocmd InsertLeave * if g:very_visual_mode_switching | colorscheme base16-railscasts | endif
+                autocmd InsertLeave * if g:very_visual_mode_switching | call PostThemeSettings() | endif
+                autocmd InsertLeave * if g:very_visual_mode_switching | call WhoaColorColumn('black','coral4') | endif
             augroup END
         endif
     endif
@@ -442,6 +447,21 @@ highlight def InterestingWord6 guifg=#000000 ctermfg=16 guibg=#ff2c4b ctermbg=19
 " Potential lag fix, https://redd.it/1p0e46
 let g:matchparen_insert_timeout=5
 
+" I assume that Airline exists because setting these on VimEnter does not
+" work as well (the tabline does not appear)...
+if !exists('g:airline_symbols')
+    let g:airline_symbols={}
+endif
+let g:airline_theme='molokai'
+" Enable powerline fonts if you have them installed.
+" https://powerline.readthedocs.org/en/master/installation.html
+" let g:airline_powerline_fonts=1
+let g:airline#extensions#branch#empty_message='no .git'
+let g:airline#extensions#tabline#enabled=1
+let g:airline#extensions#whitespace#enabled=1
+let g:airline#extensions#syntastic#enabled=1
+let g:airline#extensions#tabline#tab_nr_type=1 " unique number for each tab
+
 function! SetPluginOptions()
     if exists('g:loaded_sqlutilities')
         echom "Configuring SQL Utilities..."
@@ -495,25 +515,9 @@ function! SetPluginOptions()
         let g:syntastic_check_on_wq = 0
     endif
 
-    if exists('g:loaded_airline')
-        echom "Configuring Airline..."
-        if !exists('g:airline_symbols')
-            let g:airline_symbols={}
-        endif
-        let g:airline_theme='molokai'
-        " Enable powerline fonts if you have them installed.
-        " https://powerline.readthedocs.org/en/master/installation.html
-        " let g:airline_powerline_fonts=1
-        let g:airline#extensions#branch#empty_message='no .git'
-        let g:airline#extensions#tabline#enabled=1
-        let g:airline#extensions#whitespace#enabled=1
-        let g:airline#extensions#syntastic#enabled=1
-        let g:airline#extensions#tabline#tab_nr_type=1 " unique number for each tab
-    endif
-
     if exists('g:loaded_gundo')
         echom "Configuring Gundo..."
-        nnoremap <localleader>dd :GundoToggle<cr>
+        nnoremap <localleader>uu :GundoToggle<cr>
     endif
 
     if exists('g:loaded_indent_guides')
@@ -524,13 +528,36 @@ function! SetPluginOptions()
         let g:indent_guides_enable_on_vim_startup=1
     endif
 
+    if exists('g:multi_cursor_insert_maps')
+        echom "Configuring Indent Guides..."
+        " Default highlighting (see help :highlight and help :highlight-link)
+        highlight multiple_cursors_cursor term=reverse cterm=reverse gui=reverse
+        highlight link multiple_cursors_visual Visual
+        function! Multiple_cursors_before()
+            colorscheme base16-flat
+            call PostThemeSettings()
+            call WhoaColorColumn('black','DarkOliveGreen3')
+            if exists('g:very_visual_mode_switching')
+                let g:very_visual_mode_switching=0
+            endif
+        endfunction
+        function! Multiple_cursors_after()
+            colorscheme base16-railscasts
+            call PostThemeSettings()
+            call WhoaColorColumn('black','coral4')
+            if exists('g:very_visual_mode_switching')
+                let g:very_visual_mode_switching=1
+            endif
+        endfunction
+    endif
+
     echom "Ready."
 endfunction
 
 if has('autocmd')
     augroup plugin_setup
         " Plugins are loaded *after* Vim has finished processing .vimrc,
-        " so we test for their existance and do stuff on VimEnter.
+        " so we test for their existence and do stuff on VimEnter.
         autocmd VimEnter * call SetPluginOptions()
     augroup END
 endif
