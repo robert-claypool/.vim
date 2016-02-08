@@ -517,6 +517,8 @@ function! SetPluginOptions()
 
     if exists('g:loaded_gundo')
         echom "Configuring Gundo..."
+        let g:gundo_width = 65
+        let g:gundo_preview_height = 15
         nnoremap <localleader>uu :GundoToggle<cr>
     endif
 

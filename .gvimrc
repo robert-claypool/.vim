@@ -8,8 +8,14 @@ if has("gui_running")
         set guifont=Consolas:h12:cANSI
     endif
 
-    " Make the window larger than gVim's default
-    set lines=45 columns=130
+    if has('autocmd')
+        augroup start_maximized
+            " From http://superuser.com/a/140604/13481
+            autocmd GUIEnter * simalt ~x
+        augroup END
+    else
+        set lines=45 columns=130
+    endif
 
     set guioptions-=T   " no toolbar
     set guioptions-=e   " no fancy tabs, make them like look like console tabs
