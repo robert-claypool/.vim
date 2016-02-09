@@ -159,6 +159,8 @@ function! WhoaTypos(fg,bg)
     exe 'highlight MyTypos ctermfg='.a:fg.' ctermbg='.a:bg.' guifg='.a:fg.' guibg='.a:bg
     syntax match MyTypos /A$/ containedin=ALL
     " The A at the end of this line should be highlighted... A
+    syntax match MyTypos /:w$/ containedin=ALL
+    " The :w at the end of this line should be highlighted... :w
 endfunction
 
 " Autofix these typos.
