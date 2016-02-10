@@ -300,6 +300,7 @@ if has('autocmd')
         autocmd BufNewFile,BufRead *.js.* set filetype=javascript
         autocmd BufNewFile,BufRead *.json.* set filetype=javascript
         autocmd BufNewFile,BufRead *.config set filetype=javascript
+        autocmd BufNewFile,BufRead *.{jshintrc,eshintrc,jscsrc} set filetype=javascript
         autocmd BufNewFile,BufRead db.config set filetype=xml
         autocmd BufNewFile,BufRead Web.config set filetype=xml
         " Vim detects md files as modula2, except for README.md. Fix that.
