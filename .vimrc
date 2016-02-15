@@ -93,11 +93,15 @@ nnoremap <localleader>ww :w<cr>|  " faster save
 nnoremap <localleader>qq :q<cr>|  " faster quit
 nnoremap <localleader>wq :wq<cr>| " faster save and quit
 
+" Windows splits
+nnoremap <localleader>ws <C-W>s|  " split window horizontally
+nnoremap <localleader>wv <C-W>v|  " split window vertically
+
 " Windows management
-nnoremap <localleader>wh <C-W>H|  " align window LEFT of others
-nnoremap <localleader>wj <C-W>J|  " align window BELOW others
-nnoremap <localleader>wk <C-W>K|  " align window ABOVE others
-nnoremap <localleader>wl <C-W>L|  " align window RIGHT of others
+nnoremap <localleader>wh <C-W>h|  " align window LEFT of others
+nnoremap <localleader>wj <C-W>j|  " align window BELOW others
+nnoremap <localleader>wk <C-W>k|  " align window ABOVE others
+nnoremap <localleader>wl <C-W>l|  " align window RIGHT of others
 
 " Windows navigation
 nnoremap <localleader>hh <C-W>h|  " jump cursor, window to the LEFT
