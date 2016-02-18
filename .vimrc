@@ -94,20 +94,28 @@ nnoremap <localleader>qq :q<cr>|  " faster quit
 nnoremap <localleader>wq :wq<cr>| " faster save and quit
 
 " Windows splits
-nnoremap <localleader>ws <C-W>s|  " split window horizontally
-nnoremap <localleader>wv <C-W>v|  " split window vertically
+nnoremap <localleader>ws <C-w>s|  " split window horizontally
+nnoremap <localleader>wv <C-w>v|  " split window vertically
 
 " Windows management
-nnoremap <localleader>wh <C-W>h|  " align window LEFT of others
-nnoremap <localleader>wj <C-W>j|  " align window BELOW others
-nnoremap <localleader>wk <C-W>k|  " align window ABOVE others
-nnoremap <localleader>wl <C-W>l|  " align window RIGHT of others
+nnoremap <localleader>wh <C-w>h|  " align window LEFT of others
+nnoremap <localleader>wj <C-w>j|  " align window BELOW others
+nnoremap <localleader>wk <C-w>k|  " align window ABOVE others
+nnoremap <localleader>wl <C-w>l|  " align window RIGHT of others
 
 " Windows navigation
-nnoremap <localleader>hh <C-W>h|  " jump cursor, window to the LEFT
-nnoremap <localleader>jj <C-W>j|  " jump cursor, window to the BELOW
-nnoremap <localleader>kk <C-W>k|  " jump cursor, window to the ABOVE
-nnoremap <localleader>ll <C-W>l|  " jump cursor, window to the RIGHT
+nnoremap <localleader>hh <C-w>h|  " jump cursor, window to the LEFT
+nnoremap <localleader>jj <C-w>j|  " jump cursor, window to the BELOW
+nnoremap <localleader>kk <C-w>k|  " jump cursor, window to the ABOVE
+nnoremap <localleader>ll <C-w>l|  " jump cursor, window to the RIGHT
+
+" Quickly cycle through open buffers.
+nnoremap <C-n> :bnext<cr>
+nnoremap <C-p> :bprevious<cr>
+" Cycle and then show a list of the buffers.
+" The current buffer will be marked with a '#'.
+nnoremap <A-n> :bnext<cr>:redraw<cr>:ls<cr>
+nnoremap <A-p> :bprevious<cr>:redraw<cr>:ls<cr>
 
 " Beautify JSON with Python.
 " https://docs.python.org/3/library/json.html#json-commandline
@@ -436,7 +444,7 @@ function! HiInterestingWord(n)
     normal! `z
 endfunction
 
-nnoremap <localleader>h0 :call clearmatches()<CR>:noh<CR>
+nnoremap <localleader>h0 :call clearmatches()<cr>:noh<cr>
 nnoremap <silent> <localleader>h1 :call HiInterestingWord(1)<cr>
 nnoremap <silent> <localleader>h2 :call HiInterestingWord(2)<cr>
 nnoremap <silent> <localleader>h3 :call HiInterestingWord(3)<cr>
@@ -572,4 +580,5 @@ if has('autocmd')
 endif
 
 " Keep this last.
+
 set secure
