@@ -55,9 +55,7 @@ set sidescrolloff=3            " don't scroll any closer to the left or right
 set laststatus=2               " always show the status line
 set showmode                   " this is default for Vim, set here as a reminder
 set autoread                   " auto reload files changed outside of Vim
-
-" Don't try to syntax highlight huge lines.
-set synmaxcol=500
+set synmaxcol=600              " limit syntax highlighing
 
 " Open new split panes to the right and bottom, which feels more natural.
 set splitbelow
