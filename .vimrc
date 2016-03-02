@@ -108,8 +108,9 @@ nnoremap <localleader>kk <C-w>k|  " jump cursor, window to the ABOVE
 nnoremap <localleader>ll <C-w>l|  " jump cursor, window to the RIGHT
 
 " Quickly cycle through open buffers.
-nnoremap <C-n> :bnext<cr>
-nnoremap <C-p> :bprevious<cr>
+" nnoremap <C-n> :bnext<cr>
+" nnoremap <C-p> :bprevious<cr>|  " this overwrites CtrlP
+
 " Cycle and then show a list of the buffers.
 " The current buffer will be marked with a '#'.
 nnoremap <A-n> :bnext<cr>:redraw<cr>:ls<cr>
@@ -498,10 +499,15 @@ function! SetPluginOptions()
         " in modified buffers, since Ag can only find what is on disk.
         nnoremap <localleader>* :AgBuffer <c-r><c-w><cr>
 
+        " Use ag over grep, we extract the column as well as the file and line number.
+        set grepprg=ag\ --nogroup\ --nocolor\ --column
+
         if exists('g:loaded_ctrlp')
-            echom "Configuring CtrlP..."
+            echom "Configuring CtrlP for Ag..."
+            " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+            let g:ctrlp_user_command='Ag %s --files-with-matches --nocolor -g ""'
             " ag is fast enough that CtrlP doesn't need to cache
-            let g:ctrlp_use_caching = 0
+            let g:ctrlp_use_caching=0
         endif
     endif
 
