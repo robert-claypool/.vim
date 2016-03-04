@@ -32,7 +32,6 @@ endif
 
 set vb                         " visual beep, make co-workers happier
 set t_Co=256                   " tell Vim that the terminal supports 256 colors
-set relativenumber             " use NumberToggle() for standard line numbers... see below.
 set cursorline                 " highlight current line
 set showmatch                  " briefly jump to the matching brace when you insert one
 set incsearch                  " search as characters are typed
@@ -74,6 +73,12 @@ let g:mapleader=","
 " global plugins to clash with mappings for filetype plugins.
 " Use \\ because we must escape the backslash.
 let maplocalleader="\\"
+
+set relativenumber " use NumberToggle() for standard line numbers... see below.
+if &diff
+    set relativenumber! " no relative numbers when diffing
+    set number
+endif
 
 function! NumberToggle()
   if(&relativenumber == 1)
