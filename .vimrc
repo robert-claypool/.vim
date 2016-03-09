@@ -74,6 +74,8 @@ let g:mapleader=","
 " Use \\ because we must escape the backslash.
 let maplocalleader="\\"
 
+nnoremap <localleader>ev :vsplit $MYVIMRC<cr>| " mnemonic = 'e'dit my 'v'imrc file
+
 set relativenumber " use NumberToggle() for standard line numbers... see below.
 if &diff
     set relativenumber! " no relative numbers when diffing
