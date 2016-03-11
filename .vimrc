@@ -76,6 +76,18 @@ let maplocalleader="\\"
 
 nnoremap <localleader>ev :vsplit $MYVIMRC<cr>| " mnemonic = 'e'dit my 'v'imrc file
 
+" Easier yank into the system clipboard:
+vnoremap <localleader>yy "+y
+vnoremap <localleader>YY "+Y
+nnoremap <localleader>yy <nop>| " <nop> because it's useless to 'y' with nothing selected
+nnoremap <localleader>YY "+Y
+
+" Easier paste into the system clipboard:
+nnoremap <localleader>pp "+p
+nnoremap <localleader>PP "+P
+vnoremap <localleader>pp "+p
+vnoremap <localleader>PP "+P
+
 set relativenumber " use NumberToggle() for standard line numbers... see below.
 if &diff
     set relativenumber! " no relative numbers when diffing
