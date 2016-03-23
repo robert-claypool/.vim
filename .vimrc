@@ -1,9 +1,18 @@
-" Plugins will not load unless you have created the special ~/vimfiles folder, see .gitignore and README.md.
-if !empty(glob('~/vimfiles/autoload/pathogen.vim'))
-    " Extract plugins to a subdirectory under ~/.vim/bundle, pathogen will add them to the 'runtimepath'.
-    call pathogen#infect()
+if has('win16') || has('win32')
+    " Plugins will not load unless you have created the special ~/vimfiles folder, see .gitignore and README.md.
+    if !empty(glob('~/vimfiles/autoload/pathogen.vim'))
+        " Extract plugins to a subdirectory under ~/.vim/bundle, pathogen will add them to the 'runtimepath'.
+        call pathogen#infect()
+    else
+        echoerr "Plugins were not loaded. Please setup '~/vimfiles', see README.md"
+    endif
 else
-    echoerr "Plugins were not loaded. Please setup '~/vimfiles', see README.md"
+    " Must be Mac/Linux.
+    if !empty(glob('~/.vim/autoload/pathogen.vim'))
+        call pathogen#infect()
+    else
+        echoerr "Plugins were not loaded. Please setup '~\.vim', see README.md"
+    endif
 endif
 
 if &compatible " if not already set
@@ -48,7 +57,6 @@ set nrformats=hex              " because I literally never deal with octal, incr
 set foldcolumn=1               " add some left margin
 set encoding=utf8              " the Vim default is Latin-1, yikes! see http://unix.stackexchange.com/a/23414
 set history=500                " keep a longer history, 20 is the default
-set undolevels=500             " muchos levels of undo
 set scrolloff=5                " start scrolling a few lines before the border (more context around the cursor)
 set sidescrolloff=3            " don't scroll any closer to the left or right
 set laststatus=2               " always show the status line
@@ -290,34 +298,41 @@ else
     set wildignore+=.git\*,.hg\*,.svn\*
 endif
 
-" I'm wrapping all this in a Windows check until I have time to test on Linux.
+" Set backup/swap/undo/view files to the proper folders.
 if has('win16') || has('win32')
     " Vim backups are just a failsafe. Most files are already in source control.
     " Here we use our special ~/vimfiles folder, see .gitignore and README.md.
     " The double tailing slash tells Vim to store files using full paths,
     " thus if you edit multiple foo.txt files, they won't clobber your backups.
     set backupdir=~/vimfiles/vim-backups//
-    " ~ is the default extension, use .bak instead.
-    set backupext=.bak
-    exe 'set wildignore+=*' . &backupext
-    set backup
-
-    " Swap files go under vimfiles too.
     set directory=~/vimfiles/vim-swaps//
-
     " Undo files allow us to use undos after exiting and restarting Vim.
     " This is only present in 7.3+, see :help undo-persistence
     if exists('+undofile')
-        " Like swaps and backups, they go under vimfiles.
         set undodir=~/vimfiles/vim-undos//
-        set undolevels=500   " muchos levels of undo
-        set undoreload=10000 " max lines to save for undo on a buffer reload
-        set undofile
     endif
-
     " The default viewdir, used by :mkview, is a poor choice on Windows,
     " vimfiles/ is a path that won't need Administrator rights.
     set viewdir=~/vimfiles/vim-views//
+else
+    " Mac/Linux
+    set backupdir=~/.vim/vim-backups//
+    set directory=~/.vim/vim-swaps//
+    if exists('+undofile')
+        set undodir=~/.vim/vim-undos//
+    endif
+    set viewdir=~/.vim/vim-views//
+endif
+
+" ~ is the default extension, use .bak instead.
+set backupext=.bak
+exe 'set wildignore+=*' . &backupext
+set backup
+
+if exists('+undofile')
+    set undolevels=500   " muchos levels of undo
+    set undoreload=10000 " max lines to save for undo on a buffer reload
+    set undofile
 endif
 
 " A file type plugin (ftplugin) is a script that is run automatically

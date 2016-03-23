@@ -8,13 +8,13 @@ if has("gui_running")
         set guifont=Consolas:h12:cANSI
     endif
 
-    if has('autocmd')
+    if has("gui_win32") && has('autocmd')
         augroup start_maximized
             " From http://superuser.com/a/140604/13481
             autocmd GUIEnter * simalt ~x
         augroup END
     else
-        set lines=45 columns=130
+        set lines=45 columns=100
     endif
 
     set guioptions-=T   " no toolbar
