@@ -174,6 +174,10 @@ if v:version >= 700
     set list listchars=tab:»-,trail:·,extends:→
 endif
 
+" These line wrap settings look better if number or relativenumber are on.
+set cpoptions+=n     " start line wrapping in the line-number area.
+set showbreak=-->\ | " keep a space between \ and |
+
 if v:version >= 703
     " The default 'zip' cryptmethod is weak.
     " 7.3 added blowfish which is stronger.
@@ -273,7 +277,7 @@ if has('autocmd')
             if !exists('g:very_visual_mode_switching')
                 " Normally our InsertEnter/InsertLeave commands are fine, but
                 " Vim Multiple Cursors needs to temporarily disable them.
-                let g:very_visual_mode_switching = 1
+                let g:very_visual_mode_switching=1
             endif
             augroup mode_yo
                 " Clear the autocmds of the current group to prevent them from piling
@@ -578,16 +582,16 @@ function! SetPluginOptions()
     if exists('g:loaded_syntastic_plugin')
         echom "Configuring Syntastic..."
         " These are recommended by the Syntastic README
-        let g:syntastic_always_populate_loc_list = 1
-        let g:syntastic_auto_loc_list = 1
-        let g:syntastic_check_on_open = 1
-        let g:syntastic_check_on_wq = 0
+        let g:syntastic_always_populate_loc_list=1
+        let g:syntastic_auto_loc_list=1
+        let g:syntastic_check_on_open=1
+        let g:syntastic_check_on_wq=0
     endif
 
     if exists('g:loaded_gundo')
         echom "Configuring Gundo..."
-        let g:gundo_width = 65
-        let g:gundo_preview_height = 15
+        let g:gundo_width=65
+        let g:gundo_preview_height=15
         nnoremap <localleader>uu :GundoToggle<cr>
     endif
 
@@ -638,5 +642,4 @@ if has('autocmd')
 endif
 
 " Keep this last.
-
 set secure
