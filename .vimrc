@@ -250,6 +250,10 @@ if has('autocmd')
 
     " Using groups keeps our autocommands from being defined twice (which can happen when .vimrc is sourced)
     augroup manage_views
+        " Clear the autocmds of the current group to prevent them from piling
+        " up each time we reload vimrc.
+        autocmd!
+
         " Allow :mkview to save folds, cursor position, etc., but no 'options'
         " because remembering options tends to cause problems.
         set viewoptions-=options
@@ -272,6 +276,10 @@ if has('autocmd')
                 let g:very_visual_mode_switching = 1
             endif
             augroup mode_yo
+                " Clear the autocmds of the current group to prevent them from piling
+                " up each time we reload vimrc.
+                autocmd!
+
                 autocmd InsertEnter * if g:very_visual_mode_switching | colorscheme base16-flat | endif
                 autocmd InsertEnter * if g:very_visual_mode_switching | call PostThemeSettings() | endif
                 autocmd InsertEnter * if g:very_visual_mode_switching | call WhoaColorColumn('black','DarkOliveGreen3') | endif
@@ -341,6 +349,10 @@ endif
 if has('autocmd')
     filetype plugin indent on " turn on filetype detection and allow loading of language specific indentation files
     augroup my_filetypes
+        " Clear the autocmds of the current group to prevent them from piling
+        " up each time we reload vimrc.
+        autocmd!
+
         autocmd BufNewFile,BufRead *.server set filetype=javascript
         autocmd BufNewFile,BufRead *.js.* set filetype=javascript
         autocmd BufNewFile,BufRead *.json.* set filetype=javascript
@@ -361,6 +373,10 @@ setlocal tabstop=4
 if has('autocmd')
     " now override with filetype based indentions
     augroup filetype_overrides
+        " Clear the autocmds of the current group to prevent them from piling
+        " up each time we reload vimrc.
+        autocmd!
+
         " Two is the Node.js standard, https://github.com/nodejs/node/blob/master/.eslintrc#L46
         " Tabs are the jQuery standard, FYI. Node wins here.
         autocmd FileType javascript setlocal softtabstop=2|setlocal shiftwidth=2|setlocal expandtab
@@ -611,6 +627,10 @@ endfunction
 
 if has('autocmd')
     augroup plugin_setup
+        " Clear the autocmds of the current group to prevent them from piling
+        " up each time we reload vimrc.
+        autocmd!
+
         " Plugins are loaded *after* Vim has finished processing .vimrc,
         " so we test for their existence and do stuff on VimEnter.
         autocmd VimEnter * call SetPluginOptions()
