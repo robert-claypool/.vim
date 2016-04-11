@@ -152,6 +152,7 @@ nnoremap <localleader>=j :%!python -m json.tool<cr>
 " http://vi.stackexchange.com/a/2285/4919
 " Mnemonic for the sequence is 'd'elete 'w'hite 's'pace.
 nnoremap <localleader>dws :let _s=@/<bar>:%s/\s\+$//e<bar>:let @/=_s<bar><cr>
+" Alternatively, we can auto-trim whitespace with .editorconfig trim_trailing_whitespace.
 
 " While NerdTree plugin is installed, vim-vinegar triggers it by default.
 " If for some reason that's not working, uncomment the next line:
@@ -162,7 +163,7 @@ nnoremap <localleader>dws :let _s=@/<bar>:%s/\s\+$//e<bar>:let @/=_s<bar><cr>
 if has('spell') " spell checking was added in Vim 7
     set spelllang=en_us
     set spellsuggest=best,10 " show only the top 10
-    nnoremap <localleader>ss :setlocal spell!<cr>
+    nnoremap <localleader>ss :setlocal spell!<bar>:echo "Use vim-unimapired [os and ]os instead."<cr>
     if has('autocmd')
         " turn on by default for files < 20K
         autocmd Filetype * if getfsize(@%) < 20480 | set spell | endif
