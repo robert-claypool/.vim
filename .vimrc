@@ -627,6 +627,19 @@ function! SetPluginOptions()
         endfunction
     endif
 
+    if exists('g:loaded_startify')
+        echom "Configuring Startify..."
+        let g:startify_change_to_vcs_root=1
+        let g:startify_custom_header = [
+            \ '            __',
+            \ '    __  __ /\_\    ___ ___',
+            \ '   /\ \/\ \\/\ \ /'' __` __`\',
+            \ '   \ \ \_/ |\ \ \/\ \/\ \/\ \',
+            \ '    \ \___/  \ \_\ \_\ \_\ \_\',
+            \ '     \/__/    \/_/\/_/\/_/\/_/',
+            \ ]
+    endif
+
     echom "Ready."
 endfunction
 
