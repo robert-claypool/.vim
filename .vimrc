@@ -649,6 +649,8 @@ function! SetPluginOptions()
             \ '    \ \___/  \ \_\ \_\ \_\ \_\',
             \ '     \/__/    \/_/\/_/\/_/\/_/',
             \ ]
+        " Startify menu is "home"
+        nnoremap <localleader>hm :Startify<cr>
     endif
 
     echom "Ready."
