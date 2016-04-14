@@ -584,9 +584,20 @@ function! SetPluginOptions()
         echom "Configuring Syntastic..."
         " These are recommended by the Syntastic README
         let g:syntastic_always_populate_loc_list=1
+        let g:syntastic_loc_list_height=5
         let g:syntastic_auto_loc_list=1
         let g:syntastic_check_on_open=1
         let g:syntastic_check_on_wq=0
+        " Passive for scss because Jekyll front matter is not stripped off
+        " by Syntastic before sending it to Sass. Maybe I'll fix this with
+        " a custom SyntasticMake preprocess function... someday.
+        let g:syntastic_mode_map={
+            \ "mode": "active",
+            \ "active_filetypes": [],
+            \ "passive_filetypes": ["scss"] }
+
+        nnoremap <localleader>s? :SyntasticInfo<cr>
+        nnoremap <localleader>sc :SyntasticCheck<cr>
     endif
 
     if exists('g:loaded_gundo')
