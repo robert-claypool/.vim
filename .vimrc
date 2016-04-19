@@ -419,6 +419,11 @@ noremap  <down>  <nop>
 noremap  <left>  <nop>
 noremap  <right> <nop>
 
+" Better line jumping with wrapped lines.
+" See https://www.reddit.com/r/vim/comments/2k4cbr/problem_with_gj_and_gk/
+nnoremap <expr> k (v:count == 0 ? 'gk' : 'k')
+nnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
+
 " Typo hitting F1 will open "help" when you probably just wanted to get out of insert mode, fix that.
 inoremap <f1> <esc>
 
