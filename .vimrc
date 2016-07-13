@@ -242,13 +242,9 @@ endfunction
 
 set background=dark " this only tells Vim what the terminal's background color looks like
 
-if has('gui_running')
-    colorscheme base16-railscasts " http://chriskempson.github.io/base16
-    call PostThemeSettings()
-    call WhoaColorColumn('black','coral4') " bold, eh?
-else
-    colorscheme desert256
-endif
+colorscheme base16-railscasts " http://chriskempson.github.io/base16
+call PostThemeSettings()
+call WhoaColorColumn('black','coral4') " bold, eh?
 
 if has('autocmd')
     " Automatically save and load views/folds...
