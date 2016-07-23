@@ -101,6 +101,7 @@ if &diff
     set relativenumber! " no relative numbers when diffing
     set number
 endif
+set diffopt+=vertical " vertical splits for the files to diff
 
 function! NumberToggle()
   if(&relativenumber == 1)
