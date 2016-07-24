@@ -533,6 +533,25 @@ let g:airline#extensions#whitespace#enabled=1
 let g:airline#extensions#syntastic#enabled=1
 let g:airline#extensions#tabline#tab_nr_type=1 " unique number for each tab
 
+" Author: Tim Dahlin
+" Description: Opens all quickfix files into whatever is the active split.
+function! QuickFixOpenAll()
+    if empty(getqflist())
+        return
+    endif
+    let s:prev_val = ""
+    for d in getqflist()
+        let s:curr_val = bufname(d.bufnr)
+        if (s:curr_val != s:prev_val)
+            exec "edit " . s:curr_val
+        endif
+        let s:prev_val = s:curr_val
+    endfor
+endfunction
+" You might want to use :cdo if it's in your build
+" https://github.com/vim/vim/commit/aa23b379421aa214e6543b06c974594a25799b09
+command! Coa call QuickFixOpenAll()
+
 function! SetPluginOptions()
     if exists('g:loaded_sqlutilities')
         echom "Configuring SQL Utilities..."
