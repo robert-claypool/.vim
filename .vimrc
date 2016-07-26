@@ -173,7 +173,7 @@ endif
 
 " Show special characters.
 if v:version >= 700
-    set list listchars=tab:»-,trail:·,extends:→
+    set list listchars=tab:»-,trail:·,extends:→,eol:$
 endif
 
 " These line wrap settings look better if number or relativenumber are on.
