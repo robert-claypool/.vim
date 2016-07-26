@@ -173,6 +173,10 @@ endif
 
 " Show special characters.
 if v:version >= 700
+    " To see carriage returns as ^M, reopen the DOS-formatted file as Unix:
+    " :e ++fileformat=unix
+    " Vim hides carriage returns when the format is Unix and I don't think
+    " there's any way around that except to change the format to DOS.
     set list listchars=tab:»-,trail:·,extends:→,eol:$
 endif
 
