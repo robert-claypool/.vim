@@ -13,6 +13,10 @@ else
     else
         echoerr "Plugins were not loaded. Please setup '~\.vim', see README.md"
     endif
+
+    " Let man pages appear in the active Vim window and split
+    echom "Use :Man a_program to open the man page for a_program, e.g. :Man mkdir"
+    runtime! ftplugin/man.vim
 endif
 
 if &compatible " if not already set
