@@ -88,6 +88,10 @@ let maplocalleader="\\"
 
 nnoremap <localleader>ev :vsplit $MYVIMRC<cr>| " mnemonic = 'e'dit my 'v'imrc file
 
+if !has('clipboard')
+    echom "The +clipboard feature was not found."
+endif
+
 " Easier yank into the system clipboard:
 vnoremap <localleader>yy "+y
 vnoremap <localleader>YY "+Y
