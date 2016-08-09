@@ -13,10 +13,6 @@ else
     else
         echoerr "Plugins were not loaded. Please setup '~\.vim', see README.md"
     endif
-
-    " Let man pages appear in the active Vim window and split
-    echom "Use :Man a_program to open the man page for a_program, e.g. :Man mkdir"
-    runtime! ftplugin/man.vim
 endif
 
 if &compatible " if not already set
@@ -694,6 +690,12 @@ if has('autocmd')
         " Clear the autocmds of the current group to prevent them from piling
         " up each time we reload vimrc.
         autocmd!
+
+        " Let man pages appear in the active Vim window and split
+        if has('autocmd')
+            autocmd VimEnter * echom "Use :Man a_program to open the man page for a_program, e.g. :Man mkdir"
+        endif
+        runtime! ftplugin/man.vim
 
         " Plugins are loaded *after* Vim has finished processing .vimrc,
         " so we test for their existence and do stuff on VimEnter.
