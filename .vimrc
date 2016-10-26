@@ -88,6 +88,10 @@ if !has('clipboard')
     echom "The +clipboard feature was not found."
 endif
 
+" Make Y move like D and C.
+" By default Y copies the whole line.
+noremap Y y$
+
 " Easier yank into the system clipboard:
 vnoremap <localleader>yy "+y
 vnoremap <localleader>YY "+Y
