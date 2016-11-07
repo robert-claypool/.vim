@@ -79,3 +79,9 @@
 [submodule "bundle/vim-json"]
 	path = bundle/vim-json
 	url = git@github.com:elzr/vim-json.git
+[submodule "bundle/vim-vue"]
+	path = bundle/vim-vue
+	url = git@github.com:posva/vim-vue.git
+[submodule "bundle/vim-airline-themes"]
+	path = bundle/vim-airline-themes
+	url = git@github.com:vim-airline/vim-airline-themes
