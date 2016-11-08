@@ -186,6 +186,7 @@ if v:version >= 700
     " Vim hides carriage returns when the format is Unix and I don't think
     " there's any way around that except to change the format to DOS.
     set list listchars=tab:»-,trail:·,extends:→,eol:$
+    nnoremap <localleader>st :set list!<cr>| " mnemonic is 's'pecial 't'oggle
 endif
 
 " These line wrap settings look better if number or relativenumber are on.
