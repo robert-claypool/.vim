@@ -13,17 +13,18 @@ git submodule update
 ```
 ### On Windows
 * Both `~\.vimrc` and `~\_vimrc` work fine on my Windows machine, but using a `~\.vim` directory does not.
-On Windows, the directory for user-specific scripts is `~\vimfiles` by default, not `~\.vim`. 
+On Windows, the directory for user-specific scripts is `~\vimfiles` by default, not `~\.vim`.
 * Also it's better to create the symbolic links with `cdm.exe` and `mklink` since the `ln` command
 in Cygwin or msysgit will probably return a "Permission Denied" error.
 
 The commands below account for these Windows specific issues:
 
 ```Shell
-git clone git@github.com:robert-claypool/.vim.git ~/.vim
-mklink %HOMEPATH%\_vimrc c:\path\to\the\repo\.vim\.vimrc
-mklink %HOMEPATH%\_gvimrc c:\path\to\the\repo\.vim\.gvimrc
-mklink /D %HOMEPATH%\vimfiles c:\path\to\the\repo\.vim
+cd C:\your\path
+git clone git@github.com:robert-claypool/.vim.git
+mklink %HOMEPATH%\_vimrc C:\your\path\.vim\.vimrc
+mklink %HOMEPATH%\_gvimrc C:\your\path\.vim\.gvimrc
+mklink /D %HOMEPATH%\vimfiles C:\your\path\.vim
 cd .vim
 git submodule init
 git submodule update
