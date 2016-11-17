@@ -441,6 +441,13 @@ inoremap <f1> <esc>
 " If you don't care about that, then make ; an alias for <shift>;
 " nnoremap ; :
 
+if v:version >= 704 && has('patch235')
+    " ; gets stuck on a t command, but this was fixed in 7.3.235
+    " Make sure we allow the fix (don't use compatibility mode for ;)
+    " http://stackoverflow.com/a/15669344
+    set cpo-=;
+endif
+
 " In insert mode, pressing Ctrl-u deletes text you've typed in t
 " current line, and Ctrl-w deletes the word before the cursor.
 " You can't undo these deletions! Fix that.
