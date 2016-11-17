@@ -88,3 +88,6 @@
 [submodule "bundle/MatchTag"]
 	path = bundle/MatchTag
 	url = git@github.com:gregsexton/MatchTag.git
+[submodule "bundle/vim-fanfingtastic.git"]
+	path = bundle/vim-fanfingtastic.git
+	url = git@github.com:dahu/vim-fanfingtastic.git
