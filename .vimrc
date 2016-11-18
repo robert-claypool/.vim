@@ -1,3 +1,16 @@
+" To disable a plugin, add it's bundle name to the following list
+let g:pathogen_disabled = []
+
+" Changes Plugin requires Vim 8
+if v:version < '800'
+    call add(g:pathogen_disabled, 'changesPlugin')
+endif
+
+" Gundo requires at least Vim 7.3
+if v:version < '703' || !has('python')
+    call add(g:pathogen_disabled, 'gundo')
+endif
+
 if has('win16') || has('win32')
     " Plugins will not load unless you have created the special ~/vimfiles folder, see .gitignore and README.md.
     if !empty(glob('~/vimfiles/autoload/pathogen.vim'))
@@ -243,6 +256,7 @@ function! TweakBase16()
     " And this helps my poor eyes
     highlight Comment guifg=gray50
     highlight MatchParen ctermfg=black ctermbg=yellow guifg=black guibg=yellow
+    highlight CursorLine guibg=gray25
 endfunction
 
 function! PostThemeSettings()
@@ -458,35 +472,6 @@ inoremap <c-w> <c-g>u<c-w>
 " Make <space> in normal mode add a space.
 nnoremap <space> i<space><esc>l
 
-" Keep search matches in the middle of the window:
-" zz scrolls the cursor to center
-" zv opens just enough folds to make that line not folded
-" nnoremap n nzzzv
-" nnoremap N Nzzzv
-
-" This rewires n and N to do some fancy highlighting.
-" h/t https://github.com/greg0ire/more-instantly-better-vim
-nnoremap <silent> n nzzzv:call HighlightPosition(0.2)<cr>
-nnoremap <silent> N Nzzzv:call HighlightPosition(0.2)<cr>
-
-function! HighlightPosition(blinktime)
-    highlight RedOnRed ctermfg=red ctermbg=red
-    let [bufnum, lnum, col, off] = getpos('.')
-    let matchlen = strlen(matchstr(strpart(getline('.'),col-1),@/))
-    echo matchlen
-    let ring_pat = (lnum > 1 ? '\%'.(lnum-1).'l\%>'.max([col-4,1]) .'v\%<'.(col+matchlen+3).'v.\|' : '')
-            \ . '\%'.lnum.'l\%>'.max([col-4,1]) .'v\%<'.col.'v.'
-            \ . '\|'
-            \ . '\%'.lnum.'l\%>'.max([col+matchlen-1,1]) .'v\%<'.(col+matchlen+3).'v.'
-            \ . '\|'
-            \ . '\%'.(lnum+1).'l\%>'.max([col-4,1]) .'v\%<'.(col+matchlen+3).'v.'
-    let ring = matchadd('RedOnRed', ring_pat, 101)
-    redraw
-    exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
-    call matchdelete(ring)
-    redraw
-endfunction
-
 " Have dedicated tab switchers.
 inoremap <f7> gT
 inoremap <f8> gt
@@ -596,7 +581,50 @@ endfunction
 " https://github.com/vim/vim/commit/aa23b379421aa214e6543b06c974594a25799b09
 command! Coa call QuickFixOpenAll()
 
+function! HighlightPosition(blinktime)
+    highlight RedOnRed ctermfg=red ctermbg=red guifg=red guibg=red
+    let [bufnum, lnum, col, off] = getpos('.')
+    let matchlen = strlen(matchstr(strpart(getline('.'),col-1),@/))
+    echo matchlen
+    let ring_pat = (lnum > 1 ? '\%'.(lnum-1).'l\%>'.max([col-4,1]) .'v\%<'.(col+matchlen+3).'v.\|' : '')
+                \ . '\%'.lnum.'l\%>'.max([col-4,1]) .'v\%<'.col.'v.'
+                \ . '\|'
+                \ . '\%'.lnum.'l\%>'.max([col+matchlen-1,1]) .'v\%<'.(col+matchlen+3).'v.'
+                \ . '\|'
+                \ . '\%'.(lnum+1).'l\%>'.max([col-4,1]) .'v\%<'.(col+matchlen+3).'v.'
+    let ring = matchadd('RedOnRed', ring_pat, 101)
+    redraw
+    exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
+    call matchdelete(ring)
+    redraw
+endfunction
+
+" We wrap the N n mappings in a function to call it on VimEnter.
+" Something is overwriting them if we don't.
+function! Nn()
+    " Keep search matches in the middle of the window:
+    " zz scrolls the cursor to center
+    " zv opens just enough folds to make that line not folded
+    " nnoremap n nzzzv
+    " nnoremap N Nzzzv
+
+    " This rewires n and N to do some fancy highlighting.
+    " h/t https://github.com/greg0ire/more-instantly-better-vim
+    nnoremap <silent> n nzzzv:call HighlightPosition(0.2)<cr>
+    nnoremap <silent> N Nzzzv:call HighlightPosition(0.2)<cr>
+endfunction
+
+if has('autocmd')
+    augroup nn_setup
+        " Clear the autocmds of the current group to prevent them from piling
+        " up each time we reload vimrc.
+        autocmd!
+        autocmd VimEnter * call Nn()
+    augroup END
+endif
+
 function! SetPluginOptions()
+
     if exists('g:loaded_sqlutilities')
         echom "Configuring SQL Utilities..."
         " add mappings for SQLUtilities.vim, mnemonic explanation:
