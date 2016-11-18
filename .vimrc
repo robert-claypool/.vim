@@ -460,8 +460,31 @@ nnoremap <space> i<space><esc>l
 " Keep search matches in the middle of the window:
 " zz scrolls the cursor to center
 " zv opens just enough folds to make that line not folded
-nnoremap n nzzzv
-nnoremap N Nzzzv
+" nnoremap n nzzzv
+" nnoremap N Nzzzv
+
+" This rewires n and N to do some fancy highlighting.
+" h/t https://github.com/greg0ire/more-instantly-better-vim
+nnoremap <silent> n nzzzv:call HighlightPosition(0.2)<cr>
+nnoremap <silent> N Nzzzv:call HighlightPosition(0.2)<cr>
+
+function! HighlightPosition(blinktime)
+    highlight RedOnRed ctermfg=red ctermbg=red
+    let [bufnum, lnum, col, off] = getpos('.')
+    let matchlen = strlen(matchstr(strpart(getline('.'),col-1),@/))
+    echo matchlen
+    let ring_pat = (lnum > 1 ? '\%'.(lnum-1).'l\%>'.max([col-4,1]) .'v\%<'.(col+matchlen+3).'v.\|' : '')
+            \ . '\%'.lnum.'l\%>'.max([col-4,1]) .'v\%<'.col.'v.'
+            \ . '\|'
+            \ . '\%'.lnum.'l\%>'.max([col+matchlen-1,1]) .'v\%<'.(col+matchlen+3).'v.'
+            \ . '\|'
+            \ . '\%'.(lnum+1).'l\%>'.max([col-4,1]) .'v\%<'.(col+matchlen+3).'v.'
+    let ring = matchadd('RedOnRed', ring_pat, 101)
+    redraw
+    exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
+    call matchdelete(ring)
+    redraw
+endfunction
 
 " Have dedicated tab switchers.
 inoremap <f7> gT
