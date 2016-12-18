@@ -256,7 +256,7 @@ function! TweakBase16()
     highlight DiffText   term=reverse cterm=bold ctermfg=0 ctermbg=4 gui=bold guifg=#2b2b2b guibg=#6d9cbe
     " And this helps my poor eyes
     highlight Comment ctermfg=246 guifg=gray50
-    highlight MatchParen ctermfg=black ctermbg=yellow guifg=black guibg=yellow
+    highlight MatchParen ctermfg=lightgreen ctermbg=blue guifg=lightgreen guibg=blue
     highlight CursorLine ctermbg=234 guibg=gray25
 endfunction
 
