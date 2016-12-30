@@ -6,6 +6,9 @@ if has("gui_running")
         set guifont=Menlo\ Regular:h14
     elseif has("gui_win32")
         set guifont=Consolas:h12:cANSI
+    elseif has("x11")
+        " Use a reasonably large size even for HiDPI screens.
+        set guifont=10x20
     endif
 
     if has("gui_win32") && has('autocmd')
