@@ -563,7 +563,7 @@ let g:matchparen_insert_timeout=5
 if !exists('g:airline_symbols')
     let g:airline_symbols={}
 endif
-let g:airline_theme='base16'
+let g:airline_theme='powerlineish'
 " Enable powerline fonts if you have them installed.
 " https://powerline.readthedocs.org/en/master/installation.html
 let g:airline_powerline_fonts=1
