@@ -52,9 +52,17 @@ if has('syntax')
     syntax on " of course
 endif
 
-set vb                         " visual beep, make co-workers happier
+" Set Vim-specific sequences for RGB 24-bit colors.
+" This works in xterm when $TERM is 'xterm-256color'
+" and in termite when $TERM is 'xterm-termite'
+" and in tmux when $TERM is 'screen-256color'
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+set termguicolors
+
 set t_Co=256                   " tell Vim that the terminal supports 256 colors
 set t_ut=                      " Disable Background Color Erase for Tmux + Vim. http://superuser.com/a/562423
+set vb                         " visual beep, make co-workers happier
 set cursorline                 " highlight current line
 set showmatch                  " briefly jump to the matching brace when you insert one
 set incsearch                  " search as characters are typed
@@ -118,7 +126,7 @@ nnoremap <localleader>PP "+P
 vnoremap <localleader>pp "+p
 vnoremap <localleader>PP "+P
 
-set relativenumber " use NumberToggle() for standard line numbers... see below.
+set number " use NumberToggle() for standard line numbers... see below.
 if &diff
     set relativenumber! " no relative numbers when diffing
     set number
@@ -272,7 +280,7 @@ endfunction
 
 set background=dark " this only tells Vim what the terminal's background color looks like
 
-colorscheme base16-railscasts " http://chriskempson.github.io/base16
+colorscheme base16-brewer " http://chriskempson.github.io/base16
 call PostThemeSettings()
 call WhoaColorColumn('black','coral4') " bold, eh?
 
@@ -300,25 +308,23 @@ if has('autocmd')
 
     " Let's make it obvious if I'm in insert mode.
     if version >= 700
-        if has('gui_running')
-            if !exists('g:very_visual_mode_switching')
-                " Normally our InsertEnter/InsertLeave commands are fine, but
-                " Vim Multiple Cursors needs to temporarily disable them.
-                let g:very_visual_mode_switching=1
-            endif
-            augroup mode_yo
-                " Clear the autocmds of the current group to prevent them from piling
-                " up each time we reload vimrc.
-                autocmd!
+       if !exists('g:very_visual_mode_switching')
+           " Normally our InsertEnter/InsertLeave commands are fine, but
+           " Vim Multiple Cursors needs to temporarily disable them.
+           let g:very_visual_mode_switching=1
+       endif
+       augroup mode_yo
+           " Clear the autocmds of the current group to prevent them from piling
+           " up each time we reload vimrc.
+           autocmd!
 
-                autocmd InsertEnter * if g:very_visual_mode_switching | colorscheme base16-flat | endif
-                autocmd InsertEnter * if g:very_visual_mode_switching | call PostThemeSettings() | endif
-                autocmd InsertEnter * if g:very_visual_mode_switching | call WhoaColorColumn('black','DarkOliveGreen3') | endif
-                autocmd InsertLeave * if g:very_visual_mode_switching | colorscheme base16-railscasts | endif
-                autocmd InsertLeave * if g:very_visual_mode_switching | call PostThemeSettings() | endif
-                autocmd InsertLeave * if g:very_visual_mode_switching | call WhoaColorColumn('black','coral4') | endif
-            augroup END
-        endif
+           autocmd InsertEnter * if g:very_visual_mode_switching | colorscheme base16-flat | endif
+           autocmd InsertEnter * if g:very_visual_mode_switching | call PostThemeSettings() | endif
+           autocmd InsertEnter * if g:very_visual_mode_switching | call WhoaColorColumn('black','DarkOliveGreen3') | endif
+           autocmd InsertLeave * if g:very_visual_mode_switching | colorscheme base16-brewer | endif
+           autocmd InsertLeave * if g:very_visual_mode_switching | call PostThemeSettings() | endif
+           autocmd InsertLeave * if g:very_visual_mode_switching | call WhoaColorColumn('black','coral4') | endif
+       augroup END
     endif
 endif
 
@@ -374,6 +380,9 @@ if exists('+undofile')
     set undofile
 endif
 
+set modeline    " allow files to specify vim options
+set modelines=3 " check the top 3 lines
+
 " A file type plugin (ftplugin) is a script that is run automatically
 " when Vim detects the type of file when as file is created or opened.
 " The type can be detected from the file name extension or from the file contents.
@@ -384,6 +393,7 @@ if has('autocmd')
         " up each time we reload vimrc.
         autocmd!
 
+        autocmd BufNewFile,BufRead config set filetype=config
         autocmd BufNewFile,BufRead *.server set filetype=javascript
         autocmd BufNewFile,BufRead *.js.* set filetype=javascript
         autocmd BufNewFile,BufRead *.json.* set filetype=javascript
@@ -553,10 +563,10 @@ let g:matchparen_insert_timeout=5
 if !exists('g:airline_symbols')
     let g:airline_symbols={}
 endif
-let g:airline_theme='molokai'
+let g:airline_theme='base16'
 " Enable powerline fonts if you have them installed.
 " https://powerline.readthedocs.org/en/master/installation.html
-" let g:airline_powerline_fonts=1
+let g:airline_powerline_fonts=1
 let g:airline#extensions#branch#empty_message='no .git'
 let g:airline#extensions#tabline#enabled=1
 let g:airline#extensions#whitespace#enabled=1
@@ -723,7 +733,7 @@ function! SetPluginOptions()
             endif
         endfunction
         function! Multiple_cursors_after()
-            colorscheme base16-railscasts
+            colorscheme base16-brewer
             call PostThemeSettings()
             call WhoaColorColumn('black','coral4')
             if exists('g:very_visual_mode_switching')
