@@ -40,12 +40,12 @@ endif
 " so there's no chance of accidentally losing data.
 " Reminders:
 "   1. Edit multiple buffers using :bufdo
-"   2. Use :wq to write all
+"   2. Use :wa to write all
 set hidden
 
 " Remove ALL autocommands to prevent them from being loaded twice.
 if has('autocmd')
-  autocmd!
+    autocmd!
 endif
 
 if has('syntax')
