@@ -114,13 +114,21 @@ endif
 " By default Y copies the whole line.
 noremap Y y$
 
-" Easier yank into the system clipboard:
+" Easier yank into CLIPBOARD:
 vnoremap <localleader>yy "+y
 vnoremap <localleader>YY "+Y
 nnoremap <localleader>yy <nop>| " <nop> because it's useless to 'y' with nothing selected
 nnoremap <localleader>YY "+Y
 
-" Easier paste into the system clipboard:
+if has('X11')
+    " Easier yank into PRIMARY:
+    vnoremap <localleader>y* "*y
+    vnoremap <localleader>Y* "*Y
+    nnoremap <localleader>y* <nop>| " <nop> because it's useless to 'y' with nothing selected
+    nnoremap <localleader>Y* "*Y
+endif
+
+" Easier paste into CLIPBOARD:
 nnoremap <localleader>pp "+p
 nnoremap <localleader>PP "+P
 vnoremap <localleader>pp "+p
@@ -502,8 +510,11 @@ inoremap jj <esc>
 " setting the 'paste' option will disable other options like inoremap, see :help 'paste'
 set nopaste
 
-" Enable quick switching of "paste mode"
-set pastetoggle=<F2>
+" Enable quick switching of "paste mode".
+set pastetoggle=<f2>
+
+" Quickly reload the file.
+noremap <f3> :edit<cr>
 
 " Build our custom status line.
 " None of this matters if you are using vim-airline, which you should.
