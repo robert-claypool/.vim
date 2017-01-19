@@ -463,6 +463,10 @@ noremap  <down>  <nop>
 noremap  <left>  <nop>
 noremap  <right> <nop>
 
+" Dance faster!
+nnoremap <c-j> jjjjj
+nnoremap <c-k> kkkkk
+
 " Better line jumping with wrapped lines.
 " See https://www.reddit.com/r/vim/comments/2k4cbr/problem_with_gj_and_gk/
 nnoremap <expr> k (v:count == 0 ? 'gk' : 'k')
@@ -539,7 +543,7 @@ function! HiInterestingWord(n)
     normal! mz
     " Yank the current word into the z register.
     normal! "zyiw
-    " Calculate an arbitrary match ID.  Hopefully nothing else is using it.
+    " Calculate an arbitrary match ID. Hopefully nothing else is using it.
     let mid = 86750 + a:n
     " Clear existing matches, but don't worry if they don't exist.
     silent! call matchdelete(mid)
