@@ -254,12 +254,12 @@ endfunction
 iabbrev teh the
 iabbrev Teh The
 
-function! WhoaColorColumn(fg,bg)
+function! WhoaColorColumn(bg)
     if exists('+colorcolumn') " short lines are more readable, so...
         " add a vertical line-length column at 79 characters
         " 79 is from https://www.python.org/dev/peps/pep-0008/#maximum-line-length
         set colorcolumn=79
-        exe 'highlight ColorColumn guifg='.a:fg.' guibg='.a:bg
+        exe 'highlight ColorColumn guibg='.a:bg
     endif
 endfunction
 
@@ -290,7 +290,7 @@ set background=dark " this only tells Vim what the terminal's background color l
 
 colorscheme base16-brewer " http://chriskempson.github.io/base16
 call PostThemeSettings()
-call WhoaColorColumn('black','coral4') " bold, eh?
+call WhoaColorColumn('darkblue')
 
 if has('autocmd')
     " Automatically save and load views/folds...
@@ -328,10 +328,10 @@ if has('autocmd')
 
            autocmd InsertEnter * if g:very_visual_mode_switching | colorscheme base16-flat | endif
            autocmd InsertEnter * if g:very_visual_mode_switching | call PostThemeSettings() | endif
-           autocmd InsertEnter * if g:very_visual_mode_switching | call WhoaColorColumn('black','DarkOliveGreen3') | endif
+           autocmd InsertEnter * if g:very_visual_mode_switching | call WhoaColorColumn('DarkOliveGreen3') | endif
            autocmd InsertLeave * if g:very_visual_mode_switching | colorscheme base16-brewer | endif
            autocmd InsertLeave * if g:very_visual_mode_switching | call PostThemeSettings() | endif
-           autocmd InsertLeave * if g:very_visual_mode_switching | call WhoaColorColumn('black','coral4') | endif
+           autocmd InsertLeave * if g:very_visual_mode_switching | call WhoaColorColumn('darkblue') | endif
        augroup END
     endif
 endif
@@ -742,7 +742,7 @@ function! SetPluginOptions()
         function! Multiple_cursors_before()
             colorscheme base16-flat
             call PostThemeSettings()
-            call WhoaColorColumn('black','DarkOliveGreen3')
+            call WhoaColorColumn('DarkOliveGreen3')
             if exists('g:very_visual_mode_switching')
                 let g:very_visual_mode_switching=0
             endif
@@ -750,7 +750,7 @@ function! SetPluginOptions()
         function! Multiple_cursors_after()
             colorscheme base16-brewer
             call PostThemeSettings()
-            call WhoaColorColumn('black','coral4')
+            call WhoaColorColumn('darkblue')
             if exists('g:very_visual_mode_switching')
                 let g:very_visual_mode_switching=1
             endif
