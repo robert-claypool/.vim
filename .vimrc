@@ -328,7 +328,7 @@ if has('autocmd')
 
            autocmd InsertEnter * if g:very_visual_mode_switching | colorscheme base16-flat | endif
            autocmd InsertEnter * if g:very_visual_mode_switching | call PostThemeSettings() | endif
-           autocmd InsertEnter * if g:very_visual_mode_switching | call WhoaColorColumn('DarkOliveGreen3') | endif
+           autocmd InsertEnter * if g:very_visual_mode_switching | call WhoaColorColumn('SlateBlue4') | endif
            autocmd InsertLeave * if g:very_visual_mode_switching | colorscheme base16-brewer | endif
            autocmd InsertLeave * if g:very_visual_mode_switching | call PostThemeSettings() | endif
            autocmd InsertLeave * if g:very_visual_mode_switching | call WhoaColorColumn('darkblue') | endif
@@ -742,7 +742,7 @@ function! SetPluginOptions()
         function! Multiple_cursors_before()
             colorscheme base16-flat
             call PostThemeSettings()
-            call WhoaColorColumn('DarkOliveGreen3')
+            call WhoaColorColumn('SlateBlue4')
             if exists('g:very_visual_mode_switching')
                 let g:very_visual_mode_switching=0
             endif
