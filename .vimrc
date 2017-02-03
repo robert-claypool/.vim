@@ -288,6 +288,7 @@ endfunction
 
 set background=dark " this only tells Vim what the terminal's background color looks like
 
+" let base16colorspace=256 " https://github.com/chriskempson/base16-vim
 colorscheme base16-brewer " http://chriskempson.github.io/base16
 call PostThemeSettings()
 call WhoaColorColumn('darkblue')

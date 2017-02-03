@@ -1,5 +1,5 @@
 # .vim
-Plugins are extracted to a subdirectory under `~/.vim/bundle`, and [Pathogen](https://github.com/tpope/vim-pathogen) adds them to the `runtimepath`. To use this `.vim`, (1) clone the repo (2) clone the submodules and (3) setup a symbolic links to `.vimrc`:
+Plugins are extracted to a subdirectory under `~/.vim/bundle`, and [Pathogen](https://github.com/tpope/vim-pathogen) adds them to the `runtimepath`. To use this `.vim`, (1) clone the repo (2) clone the submodules and (3) setup symbolic links to `.vimrc`:
 
 ### On Linux
 Run `./bootstrap.sh` or...
@@ -31,6 +31,10 @@ cd .vim
 git submodule init
 git submodule update
 ```
+
+### Color Themes
+I use base-16.
+See https://github.com/chriskempson/base16-shell and https://github.com/chriskempson/base16-vim
 
 ### External Program Dependencies
 `vim-autoformat` calls external programs to achieve best results.
