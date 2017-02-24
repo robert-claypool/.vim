@@ -403,6 +403,7 @@ if has('autocmd')
         autocmd!
 
         autocmd BufNewFile,BufRead config set filetype=config
+        autocmd BufNewFile,BufRead nginx*.conf set filetype=nginx
         autocmd BufNewFile,BufRead *.server set filetype=javascript
         autocmd BufNewFile,BufRead *.js.* set filetype=javascript
         autocmd BufNewFile,BufRead *.json.* set filetype=javascript

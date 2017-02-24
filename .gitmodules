@@ -91,3 +91,6 @@
 [submodule "bundle/vim-fanfingtastic.git"]
 	path = bundle/vim-fanfingtastic.git
 	url = https://github.com/dahu/vim-fanfingtastic.git
+[submodule "bundle/nginx.vim"]
+	path = bundle/nginx.vim
+	url = https://github.com/vim-scripts/nginx.vim.git
