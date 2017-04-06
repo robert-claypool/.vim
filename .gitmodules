@@ -94,3 +94,6 @@
 [submodule "bundle/nginx.vim"]
 	path = bundle/nginx.vim
 	url = https://github.com/vim-scripts/nginx.vim.git
+[submodule "bundle/vim-markdown"]
+	path = bundle/vim-markdown
+	url = https://github.com/plasticboy/vim-markdown.git
