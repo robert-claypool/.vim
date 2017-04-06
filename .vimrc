@@ -263,22 +263,8 @@ function! WhoaColorColumn(bg)
     endif
 endfunction
 
-function! TweakBase16()
-    " Override the diff-mode highlights of base16.
-    " See comments on https://github.com/chriskempson/base16-vim/commit/2606f91
-    highlight DiffAdd    term=bold ctermfg=0 ctermbg=2 guifg=#2b2b2b guibg=#a5c261
-    highlight DiffDelete term=bold ctermfg=0 ctermbg=1 gui=bold guifg=#2b2b2b guibg=#da4939
-    highlight DiffChange term=bold ctermfg=0 ctermbg=4 guifg=#2b2b2b guibg=#6d9cbe
-    highlight DiffText   term=reverse cterm=bold ctermfg=0 ctermbg=4 gui=bold guifg=#2b2b2b guibg=#6d9cbe
-    " And this helps my poor eyes
-    highlight Comment ctermfg=246 guifg=gray50
-    highlight MatchParen ctermfg=lightgreen ctermbg=blue guifg=lightgreen guibg=blue
-    highlight CursorLine ctermbg=234 guibg=gray25
-endfunction
-
 function! PostThemeSettings()
     " Here we run stuff that must be applied after the theme has changed.
-    call TweakBase16()
     call WhoaWhitespace('red')
     call WhoaTypos('black','yellow')
     if exists('g:loaded_airline')
@@ -288,10 +274,16 @@ endfunction
 
 set background=dark " this only tells Vim what the terminal's background color looks like
 
-" let base16colorspace=256 " https://github.com/chriskempson/base16-vim
-colorscheme base16-brewer " http://chriskempson.github.io/base16
+let g:PaperColor_Theme_Options = {
+  \   'theme': {
+  \     'default.dark': {
+  \       'transparent_background': 1
+  \     }
+  \   }
+  \ }
+colorscheme PaperColor
 call PostThemeSettings()
-call WhoaColorColumn('darkblue')
+call WhoaColorColumn('#222222')
 
 if has('autocmd')
     " Automatically save and load views/folds...
@@ -317,22 +309,15 @@ if has('autocmd')
 
     " Let's make it obvious if I'm in insert mode.
     if version >= 700
-       if !exists('g:very_visual_mode_switching')
-           " Normally our InsertEnter/InsertLeave commands are fine, but
-           " Vim Multiple Cursors needs to temporarily disable them.
-           let g:very_visual_mode_switching=1
-       endif
        augroup mode_yo
            " Clear the autocmds of the current group to prevent them from piling
            " up each time we reload vimrc.
            autocmd!
 
-           autocmd InsertEnter * if g:very_visual_mode_switching | colorscheme base16-flat | endif
-           autocmd InsertEnter * if g:very_visual_mode_switching | call PostThemeSettings() | endif
-           autocmd InsertEnter * if g:very_visual_mode_switching | call WhoaColorColumn('SlateBlue4') | endif
-           autocmd InsertLeave * if g:very_visual_mode_switching | colorscheme base16-brewer | endif
-           autocmd InsertLeave * if g:very_visual_mode_switching | call PostThemeSettings() | endif
-           autocmd InsertLeave * if g:very_visual_mode_switching | call WhoaColorColumn('darkblue') | endif
+           autocmd InsertEnter * call PostThemeSettings()
+           autocmd InsertEnter * call WhoaColorColumn('#330066')
+           autocmd InsertLeave * call PostThemeSettings()
+           autocmd InsertLeave * call WhoaColorColumn('#222222')
        augroup END
     endif
 endif
@@ -734,29 +719,6 @@ function! SetPluginOptions()
         let g:indent_guides_start_level=2
         let g:indent_guides_guide_size=1
         let g:indent_guides_enable_on_vim_startup=1
-    endif
-
-    if exists('g:multi_cursor_insert_maps')
-        echom "Configuring Multiple Cursors..."
-        " Default highlighting (see help :highlight and help :highlight-link)
-        highlight multiple_cursors_cursor term=reverse cterm=reverse gui=reverse
-        highlight link multiple_cursors_visual Visual
-        function! Multiple_cursors_before()
-            colorscheme base16-flat
-            call PostThemeSettings()
-            call WhoaColorColumn('SlateBlue4')
-            if exists('g:very_visual_mode_switching')
-                let g:very_visual_mode_switching=0
-            endif
-        endfunction
-        function! Multiple_cursors_after()
-            colorscheme base16-brewer
-            call PostThemeSettings()
-            call WhoaColorColumn('darkblue')
-            if exists('g:very_visual_mode_switching')
-                let g:very_visual_mode_switching=1
-            endif
-        endfunction
     endif
 
     if exists('g:loaded_startify')
