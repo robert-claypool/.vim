@@ -40,3 +40,8 @@ See https://github.com/chriskempson/base16-shell and https://github.com/chriskem
 `vim-autoformat` calls external programs to achieve best results.
 Separately install [js-beautify](https://github.com/einars/js-beautify) and
 other formatters that you want to use.
+
+TypeScript support is provided by [Tsuquyomi](https://github.com/Quramy/tsuquyomi)
+which depends on [vimproc](https://github.com/Shougo/vimproc.vim), Node, and
+Node TypeScript. Follow the [Tsuquyomi README](https://github.com/Quramy/tsuquyomi)
+to get it working.
