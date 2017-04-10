@@ -16,9 +16,6 @@
 [submodule "bundle/vim-javascript"]
 	path = bundle/vim-javascript
 	url = https://github.com/pangloss/vim-javascript.git
-[submodule "bundle/base16-vim"]
-	path = bundle/base16-vim
-	url = https://github.com/chriskempson/base16-vim.git
 [submodule "bundle/vim-intrestingwords"]
 	path = bundle/vim-intrestingwords
 	url = https://github.com/vasconcelloslf/vim-interestingwords.git
