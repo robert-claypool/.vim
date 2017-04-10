@@ -274,13 +274,23 @@ endfunction
 
 set background=dark " this only tells Vim what the terminal's background color looks like
 
-let g:PaperColor_Theme_Options = {
-  \   'theme': {
-  \     'default.dark': {
-  \       'transparent_background': 1
-  \     }
-  \   }
-  \ }
+if has('win16') || has('win32')
+  let g:PaperColor_Theme_Options = {
+    \   'theme': {
+    \     'default.dark': {
+    \       'transparent_background': 0
+    \     }
+    \   }
+    \ }
+else
+  let g:PaperColor_Theme_Options = {
+    \   'theme': {
+    \     'default.dark': {
+    \       'transparent_background': 1
+    \     }
+    \   }
+    \ }
+endif
 colorscheme PaperColor
 call PostThemeSettings()
 call WhoaColorColumn('#222222')
