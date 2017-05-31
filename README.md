@@ -32,10 +32,6 @@ git submodule init
 git submodule update
 ```
 
-### Color Themes
-I use base-16.
-See https://github.com/chriskempson/base16-shell and https://github.com/chriskempson/base16-vim
-
 ### External Program Dependencies
 `vim-autoformat` calls external programs to achieve best results.
 Separately install [js-beautify](https://github.com/einars/js-beautify) and
