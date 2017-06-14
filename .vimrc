@@ -731,7 +731,7 @@ function! SetPluginOptions()
         " For plugin nathanaelkane/vim-indent-guides
         let g:indent_guides_start_level=2
         let g:indent_guides_guide_size=1
-        let g:indent_guides_enable_on_vim_startup=1
+        nnoremap <localleader>ig :IndentGuidesToggle<cr>
     endif
 
     if exists('g:loaded_startify')
@@ -772,6 +772,12 @@ if has('autocmd')
             autocmd VimEnter * echom "Use :Man a_program to open the man page for a_program, e.g. :Man mkdir"
         endif
         runtime! ftplugin/man.vim
+
+        " This must be set when indent_guides is loaded...
+        let g:indent_guides_enable_on_vim_startup=1
+        let g:indent_guides_auto_colors = 0
+        autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#161616 ctermbg=black
+        autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#1d1d1d ctermbg=darkgrey
 
         " Plugins are loaded *after* Vim has finished processing .vimrc,
         " so we test for their existence and do stuff on VimEnter.
