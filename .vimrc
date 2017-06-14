@@ -721,6 +721,9 @@ function! SetPluginOptions()
         let g:gundo_width=65
         let g:gundo_preview_height=15
         nnoremap <localleader>uu :GundoToggle<cr>
+        if !has('python')
+            echom "Warning: Gundo requires Vim to be compiled with Python 2.4+"
+        endif
     endif
 
     if exists('g:loaded_indent_guides')
