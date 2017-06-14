@@ -746,6 +746,15 @@ function! SetPluginOptions()
         nnoremap <localleader>hm :Startify<cr>
     endif
 
+    if exists('g:loaded_rainbow_parentheses')
+        echom "Configuring Rainbow Parentheses..."
+        autocmd FileType json,javascript,css,html RainbowParenthesesActivate
+        autocmd Syntax javascript RainbowParenthesesLoadRound
+        autocmd Syntax json,javascript RainbowParenthesesLoadSquare
+        autocmd Syntax json,javascript,css RainbowParenthesesLoadBraces
+        autocmd Syntax html RainbowParenthesesLoadChevrons
+    endif
+
     echom "Ready."
 endfunction
 
