@@ -85,6 +85,7 @@ set laststatus=2               " always show the status line
 set showmode                   " this is default for Vim, set here as a reminder
 set autoread                   " auto reload files changed outside of Vim
 set synmaxcol=600              " limit syntax highlighing
+set breakindent                " make long lines wrap with indentation
 
 " Open new split panes to the right and bottom, which feels more natural.
 set splitbelow
