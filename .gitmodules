@@ -106,3 +106,9 @@
 [submodule "bundle/rainbow_parentheses.vim"]
 	path = bundle/rainbow_parentheses.vim
 	url = https://github.com/robert-claypool/rainbow_parentheses.vim.git
+[submodule "bundle/vim-conflicted"]
+	path = bundle/vim-conflicted
+	url = https://github.com/christoomey/vim-conflicted.git
+[submodule "bundle/neocomplete.vim"]
+	path = bundle/neocomplete.vim
+	url = https://github.com/Shougo/neocomplete.vim.git

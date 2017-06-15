@@ -764,6 +764,12 @@ function! SetPluginOptions()
         autocmd Syntax html RainbowParenthesesLoadChevrons
     endif
 
+    " NeoComplete requires Lua.
+    if has('lua') && exists('g:loaded_neocomplete')
+        echom "Configuring NeoComplete..."
+        let g:neocomplete#enable_smart_case=1
+    endif
+
     echom "Ready."
 endfunction
 
@@ -784,6 +790,9 @@ if has('autocmd')
         let g:indent_guides_auto_colors = 0
         autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#161616 ctermbg=black
         autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#1d1d1d ctermbg=darkgrey
+
+        " This must be set when neocomplete is loaded...
+        let g:neocomplete#enable_at_startup=1
 
         " Plugins are loaded *after* Vim has finished processing .vimrc,
         " so we test for their existence and do stuff on VimEnter.
