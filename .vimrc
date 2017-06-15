@@ -297,6 +297,11 @@ call PostThemeSettings()
 call WhoaColorColumn('#222222')
 
 if has('autocmd')
+    " It's an annoyance to manually equalize Vim splits changed by some type
+    " of resize event, for example zooming in and out a tmux pane.
+    " This takes care of the split equalization automatically:
+    autocmd VimResized * wincmd =
+
     " Automatically save and load views/folds...
 
     " Using groups keeps our autocommands from being defined twice (which can happen when .vimrc is sourced)
