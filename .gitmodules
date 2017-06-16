@@ -13,9 +13,6 @@
 [submodule "bundle/vim-multiple-cursors"]
 	path = bundle/vim-multiple-cursors
 	url = https://github.com/terryma/vim-multiple-cursors.git
-[submodule "bundle/vim-javascript"]
-	path = bundle/vim-javascript
-	url = https://github.com/pangloss/vim-javascript.git
 [submodule "bundle/vim-intrestingwords"]
 	path = bundle/vim-intrestingwords
 	url = https://github.com/vasconcelloslf/vim-interestingwords.git
@@ -73,12 +70,6 @@
 [submodule "bundle/vim-startify"]
 	path = bundle/vim-startify
 	url = https://github.com/mhinz/vim-startify.git
-[submodule "bundle/vim-json"]
-	path = bundle/vim-json
-	url = https://github.com/elzr/vim-json.git
-[submodule "bundle/vim-vue"]
-	path = bundle/vim-vue
-	url = https://github.com/posva/vim-vue.git
 [submodule "bundle/vim-airline-themes"]
 	path = bundle/vim-airline-themes
 	url = https://github.com/vim-airline/vim-airline-themes
@@ -88,15 +79,6 @@
 [submodule "bundle/vim-fanfingtastic.git"]
 	path = bundle/vim-fanfingtastic.git
 	url = https://github.com/dahu/vim-fanfingtastic.git
-[submodule "bundle/nginx.vim"]
-	path = bundle/nginx.vim
-	url = https://github.com/vim-scripts/nginx.vim.git
-[submodule "bundle/vim-markdown"]
-	path = bundle/vim-markdown
-	url = https://github.com/plasticboy/vim-markdown.git
-[submodule "bundle/typescript-vim"]
-	path = bundle/typescript-vim
-	url = https://github.com/leafgarland/typescript-vim.git
 [submodule "bundle/vimproc.vim"]
 	path = bundle/vimproc.vim
 	url = https://github.com/Shougo/vimproc.vim.git
@@ -112,3 +94,6 @@
 [submodule "bundle/neocomplete.vim"]
 	path = bundle/neocomplete.vim
 	url = https://github.com/Shougo/neocomplete.vim.git
+[submodule "bundle/vim-polyglot"]
+	path = bundle/vim-polyglot
+	url = https://github.com/sheerun/vim-polyglot.git
