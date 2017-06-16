@@ -105,6 +105,9 @@ let g:mapleader=","
 " Use \\ because we must escape the backslash.
 let maplocalleader="\\"
 
+" JavaScript formatting requires https://github.com/prettier/prettier
+vnoremap <localleader>ff :'<,'>!prettier --stdin --trailing-comma es5 --single-quote<cr>
+
 nnoremap <localleader>ev :vsplit $MYVIMRC<cr>| " mnemonic = 'e'dit my 'v'imrc file
 
 if !has('clipboard')

@@ -33,9 +33,8 @@ git submodule update
 ```
 
 ### External Program Dependencies
-`vim-autoformat` calls external programs to achieve best results.
-Separately install [js-beautify](https://github.com/einars/js-beautify) and
-other formatters that you want to use.
+In Visual mode, `<localleader>ff` calls Prettier on the selected lines of
+JavaScript. Prettier is awesome, install it with `npm install -g prettier`.
 
 TypeScript support is provided by [Tsuquyomi](https://github.com/Quramy/tsuquyomi)
 which depends on [vimproc](https://github.com/Shougo/vimproc.vim), Node, and
