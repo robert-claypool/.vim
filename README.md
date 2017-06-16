@@ -33,8 +33,10 @@ git submodule update
 ```
 
 ### External Program Dependencies
-In Visual mode, `<localleader>ff` calls Prettier on the selected lines of
-JavaScript. Prettier is awesome, install it with `npm install -g prettier`.
+Prettier is awesome, install it with `npm install -g prettier`.
+
+In Visual mode, `<localleader>=f` calls Prettier on the selected lines of
+JavaScript, use `<localleader>=t` for TypeScript.
 
 TypeScript support is provided by [Tsuquyomi](https://github.com/Quramy/tsuquyomi)
 which depends on [vimproc](https://github.com/Shougo/vimproc.vim), Node, and
