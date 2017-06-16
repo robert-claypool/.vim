@@ -41,3 +41,7 @@ TypeScript support is provided by [Tsuquyomi](https://github.com/Quramy/tsuquyom
 which depends on [vimproc](https://github.com/Shougo/vimproc.vim), Node, and
 Node TypeScript. Follow the [Tsuquyomi README](https://github.com/Quramy/tsuquyomi)
 to get it working.
+
+JavaScript auto-completion is better with Tern.
+To get it working, Tern must be npm installed into bundle/tern_for_vim and
+Node must be globally available. See https://github.com/ternjs/tern_for_vim

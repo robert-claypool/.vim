@@ -794,6 +794,14 @@ if has('autocmd')
         " This must be set when neocomplete is loaded...
         let g:neocomplete#enable_at_startup=1
 
+        " NOTICE: Tern must be npm installed into bundle/tern_for_vim and
+        " Node must be globally available.
+        " See https://github.com/ternjs/tern_for_vim
+        "
+        " By default, the Tern server will shut itself down after five minutes
+        " of inactivity. Use --persistent to disable auto-shutdown.
+        let g:tern#arguments = ["--persistent"]
+
         " Plugins are loaded *after* Vim has finished processing .vimrc,
         " so we test for their existence and do stuff on VimEnter.
         autocmd VimEnter * call SetPluginOptions()
