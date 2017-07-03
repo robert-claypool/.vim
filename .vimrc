@@ -1,4 +1,4 @@
-" To disable a plugin, add it's bundle name to the following list
+" To disable a plugin, add its bundle name to the following list
 let g:pathogen_disabled = []
 
 " Changes Plugin requires Vim 8
@@ -190,11 +190,6 @@ nnoremap <localleader>ll <C-w>l|  " jump cursor, window to the RIGHT
 " The current buffer will be marked with a '#'.
 nnoremap <A-n> :bnext<cr>:redraw<cr>:ls<cr>
 nnoremap <A-p> :bprevious<cr>:redraw<cr>:ls<cr>
-
-" Beautify JSON with Python.
-" https://docs.python.org/3/library/json.html#json-commandline
-" Since = is the Vim operator to format a selected text, I'm using it here.
-nnoremap <localleader>=j :%!python -m json.tool<cr>
 
 " Remove all trailing whitespace.
 " http://vi.stackexchange.com/a/2285/4919
