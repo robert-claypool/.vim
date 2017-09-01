@@ -782,6 +782,10 @@ if has('autocmd')
         " up each time we reload vimrc.
         autocmd!
 
+        " Disable less compatibility mode for Vim PAGER, use regular Vim motions
+        let g:less={}
+        let g:less.enabled=0
+
         " Let man pages appear in the active Vim window and split
         if has('autocmd')
             autocmd VimEnter * echom "Use :Man a_program to open the man page for a_program, e.g. :Man mkdir"
